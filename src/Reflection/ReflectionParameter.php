@@ -14,33 +14,50 @@
  *
  * @category   Zend
  * @package    Zend_Server
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-
-/**
- * Return value reflection
- *
- * Stores the return value type and description
- *
- * @uses       Zend_Server_Reflection_Exception
- * @category   Zend
- * @package    Zend_Server
- * @subpackage Reflection
+ * @subpackage Zend_Server_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Server_Reflection_ReturnValue
+
+/**
+ * @namespace
+ */
+namespace Zend\Server\Reflection;
+
+/**
+ * Parameter Reflection
+ *
+ * Decorates a ReflectionParameter to allow setting the parameter type
+ *
+ * @uses       \Zend\Server\Reflection\Exception
+ * @category   Zend
+ * @package    Zend_Server
+ * @subpackage Zend_Server_Reflection
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class ReflectionParameter
 {
     /**
-     * Return value type
+     * @var ReflectionParameter
+     */
+    protected $_reflection;
+
+    /**
+     * Parameter position
+     * @var int
+     */
+    protected $_position;
+
+    /**
+     * Parameter type
      * @var string
      */
     protected $_type;
 
     /**
-     * Return value description
+     * Parameter description
      * @var string
      */
     protected $_description;
@@ -48,13 +65,31 @@ class Zend_Server_Reflection_ReturnValue
     /**
      * Constructor
      *
-     * @param string $type Return value type
-     * @param string $description Return value type
+     * @param ReflectionParameter $r
+     * @param string $type Parameter type
+     * @param string $description Parameter description
      */
-    public function __construct($type = 'mixed', $description = '')
+    public function __construct(\ReflectionParameter $r, $type = 'mixed', $description = '')
     {
+        $this->_reflection = $r;
         $this->setType($type);
         $this->setDescription($description);
+    }
+
+    /**
+     * Proxy reflection calls
+     *
+     * @param string $method
+     * @param array $args
+     * @return mixed
+     */
+    public function __call($method, $args)
+    {
+        if (method_exists($this->_reflection, $method)) {
+            return call_user_func_array(array($this->_reflection, $method), $args);
+        }
+
+        throw new Exception('Invalid reflection method');
     }
 
     /**
@@ -76,7 +111,7 @@ class Zend_Server_Reflection_ReturnValue
     public function setType($type)
     {
         if (!is_string($type) && (null !== $type)) {
-            throw new Zend_Server_Reflection_Exception('Invalid parameter type');
+            throw new Exception('Invalid parameter type');
         }
 
         $this->_type = $type;
@@ -101,9 +136,30 @@ class Zend_Server_Reflection_ReturnValue
     public function setDescription($description)
     {
         if (!is_string($description) && (null !== $description)) {
-            throw new Zend_Server_Reflection_Exception('Invalid parameter description');
+            throw new Exception('Invalid parameter description');
         }
 
         $this->_description = $description;
+    }
+
+    /**
+     * Set parameter position
+     *
+     * @param int $index
+     * @return void
+     */
+    public function setPosition($index)
+    {
+        $this->_position = (int) $index;
+    }
+
+    /**
+     * Return parameter position
+     *
+     * @return int
+     */
+    public function getPosition()
+    {
+        return $this->_position;
     }
 }
