@@ -32,7 +32,7 @@ namespace Zend\Server;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ServerInterface
+interface Server
 {
     /**
      * Attach a function as a server method
@@ -94,7 +94,7 @@ interface ServerInterface
      * Return a server definition array
      *
      * Returns a server definition array as created using
-     * {@link * \Zend\Server\Reflection\Reflection}. Can be used for server introspection,
+     * {@link * \Zend\Server\Reflection}. Can be used for server introspection,
      * documentation, or persistence.
      *
      * @access public
