@@ -14,7 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Server
- * @subpackage Zend_Server_Reflection
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,18 +21,26 @@
 /**
  * @namespace
  */
-namespace Zend\Server\Reflection;
+namespace Zend\Server;
 
 /**
- * Zend_Server_Reflection exceptions
+ * Client Interface
  *
- * @uses       \Zend\Server\Exception
  * @category   Zend
  * @package    Zend_Server
- * @subpackage Zend_Server_Reflection
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends \Zend\Server\Exception
+interface Client
 {
+    /**
+     * Executes remote call
+     *
+     * Unified interface for calling custome remote methods.
+     *
+     * @param  string $method Remote call name.
+     * @param  array $params Call parameters.
+     * @return mixed Remote call results.
+     */
+    public function call($method, $params = array());
 }
