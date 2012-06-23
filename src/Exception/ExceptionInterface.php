@@ -14,26 +14,20 @@
  *
  * @category   Zend
  * @package    Zend_Server
- * @subpackage Zend_Server_Reflection
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
-namespace Zend\Server\Reflection;
+namespace Zend\Server\Exception;
 
 /**
- * Zend_Server_Reflection exceptions
+ * Zend_Server exceptions
  *
- * @uses       \Zend\Server\Exception
  * @category   Zend
  * @package    Zend_Server
- * @subpackage Zend_Server_Reflection
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends \Zend\Server\Exception
+interface ExceptionInterface
 {
 }
