@@ -9,7 +9,7 @@
     "homepage": "https://github.com/zendframework/zend-server",
     "autoload": {
         "psr-4": {
-            "Zend\\Server": "src/"
+            "Zend\\Server\\": "src/"
         }
     },
     "require": {
