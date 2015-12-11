@@ -238,7 +238,7 @@ abstract class AbstractFunction
         $paramCount = $function->getNumberOfParameters();
         $parameters = $function->getParameters();
 
-        if(!$this->docComment) {
+        if (!$this->docComment) {
             $this->docComment = $function->getDocComment();
         }
 

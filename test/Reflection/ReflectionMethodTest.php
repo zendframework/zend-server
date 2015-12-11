@@ -29,7 +29,8 @@ interface ReflectionMethodInterface
  * Class ReflectionMethodTestInstance
  * for testing only
  */
-class ReflectionMethodTestInstance implements ReflectionMethodInterface {
+class ReflectionMethodTestInstance implements ReflectionMethodInterface
+{
 
     /**
      * {@inheritdoc}

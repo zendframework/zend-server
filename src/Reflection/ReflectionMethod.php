@@ -121,8 +121,8 @@ class ReflectionMethod extends AbstractFunction
 
         // fetch doc blocks from interfaces
         $interfaceReflectionList = $this->classReflection->getInterfaces();
-        foreach($interfaceReflectionList as $interfaceReflection) {
-            if(!$interfaceReflection->hasMethod($currentMethodName)) {
+        foreach ($interfaceReflectionList as $interfaceReflection) {
+            if (!$interfaceReflection->hasMethod($currentMethodName)) {
                 continue;
             }
 
@@ -154,21 +154,21 @@ class ReflectionMethod extends AbstractFunction
      */
     private function fetchRecursiveDocBlockFromParent($reflectionClass, $methodName)
     {
-        $docComment = array();
+        $docComment = [];
         $parentReflectionClass = $reflectionClass->getParentClass();
-        if(!$parentReflectionClass) {
+        if (!$parentReflectionClass) {
             return;
         }
 
-        if(!$parentReflectionClass->hasMethod($methodName)) {
+        if (!$parentReflectionClass->hasMethod($methodName)) {
             return;
         }
 
         $methodReflection = $parentReflectionClass->getMethod($methodName);
         $docCommentLast = $methodReflection->getDocComment();
         $docComment[] = $docCommentLast;
-        if($this->isInherit($docCommentLast)){
-            if($docCommentFetched = $this->fetchRecursiveDocBlockFromParent($parentReflectionClass, $methodName)) {
+        if ($this->isInherit($docCommentLast)) {
+            if ($docCommentFetched = $this->fetchRecursiveDocBlockFromParent($parentReflectionClass, $methodName)) {
                 $docComment = array_merge($docComment, $docCommentFetched);
             }
         }
