@@ -71,6 +71,12 @@ abstract class AbstractFunction
      */
     protected $prototypes = [];
 
+    /**
+     * Phpdoc comment
+     * @var string
+     */
+    protected $docComment = '';
+
     private $return;
     private $returnDesc;
     private $paramDesc;
@@ -231,7 +237,12 @@ abstract class AbstractFunction
         $function   = $this->reflection;
         $paramCount = $function->getNumberOfParameters();
         $parameters = $function->getParameters();
-        $scanner    = new DocBlockReflection(($function->getDocComment()) ? : '/***/');
+
+        if (!$this->docComment) {
+            $this->docComment = $function->getDocComment();
+        }
+
+        $scanner    = new DocBlockReflection(($this->docComment) ? : '/***/');
         $helpText   = $scanner->getLongDescription();
         /* @var \Zend\Code\Reflection\DocBlock\Tag\ParamTag[] $paramTags */
         $paramTags = $scanner->getTags('param');
