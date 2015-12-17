@@ -2,11 +2,13 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.5.2 - TBD
+## 2.6.0 - 2015-12-17
 
 ### Added
 
-- Nothing.
+- [#3](https://github.com/zendframework/zend-server/pull/3) adds support for
+  resolving `{@inheritdoc}` annotations to the original parent during
+  reflection.
 
 ### Deprecated
 
