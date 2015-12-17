@@ -20,4 +20,5 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#2](https://github.com/zendframework/zend-server/pull/2) fixes misleading exception in reflectFunction that referenced reflectClass.
+- [#2](https://github.com/zendframework/zend-server/pull/2) fixes misleading
+  exception in reflectFunction that referenced reflectClass.

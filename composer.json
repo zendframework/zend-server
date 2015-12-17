@@ -13,7 +13,7 @@
         }
     },
     "require": {
-        "php": ">=5.5",
+        "php": "^5.5 || ^7.0",
         "zendframework/zend-stdlib": "~2.5",
         "zendframework/zend-code": "~2.5"
     },
@@ -21,8 +21,8 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "2.5-dev",
-            "dev-develop": "2.6-dev"
+            "dev-master": "2.6-dev",
+            "dev-develop": "2.7-dev"
         }
     },
     "autoload-dev": {
@@ -31,7 +31,7 @@
         }
     },
     "require-dev": {
-        "fabpot/php-cs-fixer": "1.7.*",
-        "phpunit/PHPUnit": "~4.0"
+        "fabpot/php-cs-fixer": "^1.7.0",
+        "phpunit/PHPUnit": "^4.0"
     }
 }
