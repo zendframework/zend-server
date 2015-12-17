@@ -12,6 +12,51 @@ namespace ZendTest\Server\Reflection;
 use Zend\Server\Reflection;
 
 /**
+ * Interface ReflectionMethodInterface
+ */
+interface ReflectionMethodInterface
+{
+    /**
+     * Test method
+     *
+     * @param ReflectionMethodTest $reflectionMethodTest Reflection method
+     * @param array                $anything             Some array information
+     */
+    public function testMethod(ReflectionMethodTest $reflectionMethodTest, array $anything);
+}
+
+/**
+ * Class ReflectionMethodTestInstance
+ * for testing only
+ */
+class ReflectionMethodTestInstance implements ReflectionMethodInterface
+{
+
+    /**
+     * {@inheritdoc}
+     */
+    public function testMethod(ReflectionMethodTest $reflectionMethodTest, array $anything)
+    {
+        // it doesn`t matter
+    }
+}
+
+/**
+ * Class ReflectionMethodNode
+ * for testing only
+ */
+class ReflectionMethodNode extends Reflection\Node
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function setParent(Reflection\Node $node, $new = false)
+    {
+        // it doesn`t matter
+    }
+}
+
+/**
  * Test case for \Zend\Server\Reflection\ReflectionMethod
  *
  * @group      Zend_Server
@@ -86,5 +131,37 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Server\Reflection\AbstractFunction', $u);
         $this->assertEquals($r->getName(), $u->getName());
         $this->assertEquals($r->getDeclaringClass()->getName(), $u->getDeclaringClass()->getName());
+    }
+
+    /**
+     * Test fetch method doc block from interface
+     */
+    public function testMethodDocBlockFromInterface()
+    {
+        $reflectionClass = new \ReflectionClass('ZendTest\Server\Reflection\ReflectionMethodTestInstance');
+        $reflectionMethod = $reflectionClass->getMethod('testMethod');
+
+        $zendReflectionMethod = new Reflection\ReflectionMethod(new Reflection\ReflectionClass($reflectionClass), $reflectionMethod);
+        list($prototype) = $zendReflectionMethod->getPrototypes();
+        list($first, $second) = $prototype->getParameters();
+
+        self::assertEquals('ReflectionMethodTest', $first->getType());
+        self::assertEquals('array', $second->getType());
+    }
+
+    /**
+     * Test fetch method doc block from parent class
+     */
+    public function testMethodDocBlockFromParent()
+    {
+        $reflectionClass = new \ReflectionClass('ZendTest\Server\Reflection\ReflectionMethodNode');
+        $reflectionMethod = $reflectionClass->getMethod('setParent');
+
+        $zendReflectionMethod = new Reflection\ReflectionMethod(new Reflection\ReflectionClass($reflectionClass), $reflectionMethod);
+        $prototypes = $zendReflectionMethod->getPrototypes();
+        list($first, $second) = $prototypes[1]->getParameters();
+
+        self::assertEquals('\Zend\Server\Reflection\Node', $first->getType());
+        self::assertEquals('bool', $second->getType());
     }
 }
