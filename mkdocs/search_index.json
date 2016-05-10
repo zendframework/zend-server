@@ -1,0 +1,34 @@
+{
+    "docs": [
+        {
+            "location": "/",
+            "text": "../../README.md",
+            "title": "Home"
+        },
+        {
+            "location": "/intro/",
+            "text": "Introduction\n\n\nThe zend-server family of classes provides functionality for the various server\nclasses, including \nzend-xmlrpc\n and\n\nzend-json-server\n.\n\nZend\\Server\\Server\n provides an interface that mimics PHP\u2019s \nSoapServer\n class;\nall RPC-style server classes should implement this interface in order to provide a\nstandard server API.\n\n\nThe \nZend\\Server\\Reflection\n tree provides a standard mechanism for performing\nfunction and class introspection for use as callbacks with the server classes,\nand provides data suitable for use with \nZend\\Server\\Server\n's \ngetFunctions()\n\nand \nloadFunctions()\n methods.",
+            "title": "Intro"
+        },
+        {
+            "location": "/intro/#introduction",
+            "text": "The zend-server family of classes provides functionality for the various server\nclasses, including  zend-xmlrpc  and zend-json-server . Zend\\Server\\Server  provides an interface that mimics PHP\u2019s  SoapServer  class;\nall RPC-style server classes should implement this interface in order to provide a\nstandard server API.  The  Zend\\Server\\Reflection  tree provides a standard mechanism for performing\nfunction and class introspection for use as callbacks with the server classes,\nand provides data suitable for use with  Zend\\Server\\Server 's  getFunctions() \nand  loadFunctions()  methods.",
+            "title": "Introduction"
+        },
+        {
+            "location": "/reflection/",
+            "text": "Zend\\Server\\Reflection\n\n\nZend\\Server\\Reflection\n provides a standard mechanism for performing function\nand class introspection for use with server classes. It is based on PHP's\nReflection API, augmenting it with methods for retrieving parameter and return\nvalue types and descriptions, a full list of function and method prototypes\n(i.e., all possible valid calling combinations), and function or method\ndescriptions.\n\n\nTypically, this functionality will only be used by developers of RPC-style\nserver classes for the framework.\n\n\nUsage\n\n\nBasic usage is as follows:\n\n\nuse My\\Entity;\nuse Zend\\Server\\Reflection;\n\n$class    = Reflection::reflectClass(Entity::class);\n$function = Reflection::reflectFunction('my_function');\n\n// Get prototypes\n$prototypes = $function->getPrototypes();\n\n// Loop through each prototype for the function\nforeach ($prototypes as $prototype) {\n\n    // Get prototype return type\n    printf(\"Return type: %s\\n\", $prototype->getReturnType());\n\n    // Get prototype parameters\n    $parameters = $prototype->getParameters();\n\n    echo \"Parameters: \\n\";\n    foreach ($parameters as $parameter) {\n        // Get parameter type\n        printf(\"    %s\\n\", $parameter->getType());\n    }\n}\n\n// Get namespace for a class, function, or method.\n// Namespaces may be set at instantiation time (second argument), or using\n// setNamespace().\n$class->getNamespace();\n\n\n\n\nreflectFunction()\n returns a \nZend\\Server\\Reflection\\Function\n object;\n\nreflectClass()\n returns a \nZend\\Server\\Reflection\\Class\n object. Please refer\nto the API documentation to see what methods are available to each.",
+            "title": "Reflection"
+        },
+        {
+            "location": "/reflection/#zend92server92reflection",
+            "text": "Zend\\Server\\Reflection  provides a standard mechanism for performing function\nand class introspection for use with server classes. It is based on PHP's\nReflection API, augmenting it with methods for retrieving parameter and return\nvalue types and descriptions, a full list of function and method prototypes\n(i.e., all possible valid calling combinations), and function or method\ndescriptions.  Typically, this functionality will only be used by developers of RPC-style\nserver classes for the framework.",
+            "title": "Zend\\Server\\Reflection"
+        },
+        {
+            "location": "/reflection/#usage",
+            "text": "Basic usage is as follows:  use My\\Entity;\nuse Zend\\Server\\Reflection;\n\n$class    = Reflection::reflectClass(Entity::class);\n$function = Reflection::reflectFunction('my_function');\n\n// Get prototypes\n$prototypes = $function->getPrototypes();\n\n// Loop through each prototype for the function\nforeach ($prototypes as $prototype) {\n\n    // Get prototype return type\n    printf(\"Return type: %s\\n\", $prototype->getReturnType());\n\n    // Get prototype parameters\n    $parameters = $prototype->getParameters();\n\n    echo \"Parameters: \\n\";\n    foreach ($parameters as $parameter) {\n        // Get parameter type\n        printf(\"    %s\\n\", $parameter->getType());\n    }\n}\n\n// Get namespace for a class, function, or method.\n// Namespaces may be set at instantiation time (second argument), or using\n// setNamespace().\n$class->getNamespace();  reflectFunction()  returns a  Zend\\Server\\Reflection\\Function  object; reflectClass()  returns a  Zend\\Server\\Reflection\\Class  object. Please refer\nto the API documentation to see what methods are available to each.",
+            "title": "Usage"
+        }
+    ]
+}
