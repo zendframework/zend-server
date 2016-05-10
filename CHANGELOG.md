@@ -6,7 +6,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#13](https://github.com/zendframework/zend-server/pull/13) adds and publishes
+  the documentation to https://zendframework.github.io/zend-server
 
 ### Deprecated
 
