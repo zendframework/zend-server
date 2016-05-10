@@ -1,7 +1,0 @@
-{
-    "title": "Zend\\Server",
-    "target": "html/",
-    "content": [
-        "book/zend.server.reflection.md"
-    ]
-}
