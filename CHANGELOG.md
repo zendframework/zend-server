@@ -2,10 +2,12 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.7.0 - TBD
+## 2.7.0 - 2016-06-20
 
 ### Added
 
+- [#13](https://github.com/zendframework/zend-server/pull/13) adds and publishes
+  the documentation to https://zendframework.github.io/zend-server
 - [#14](https://github.com/zendframework/zend-server/pull/14) adds support for
   zend-code v3 (while retaining support for zend-code v2).
 
@@ -20,25 +22,6 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#14](https://github.com/zendframework/zend-server/pull/14) removes support
   for PHP 5.5; the new minimum supported version of PHP is 5.6.
-
-### Fixed
-
-- Nothing.
-
-## 2.6.2 - TBD
-
-### Added
-
-- [#13](https://github.com/zendframework/zend-server/pull/13) adds and publishes
-  the documentation to https://zendframework.github.io/zend-server
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
 
 ### Fixed
 
