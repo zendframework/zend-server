@@ -6,15 +6,20 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#14](https://github.com/zendframework/zend-server/pull/14) adds support for
+  zend-code v3 (while retaining support for zend-code v2).
 
 ### Deprecated
 
-- Nothing.
+- [#14](https://github.com/zendframework/zend-server/pull/14) deprecates all
+  underscore-prefixed methods of `AbstractServer`; they will be renamed in
+  version 3 to remove the prefix (though, in the case of `_dispatch()`, it will
+  be renamed entirely, likely to `performDispatch()`).
 
 ### Removed
 
-- Nothing.
+- [#14](https://github.com/zendframework/zend-server/pull/14) removes support
+  for PHP 5.5; the new minimum supported version of PHP is 5.6.
 
 ### Fixed
 
