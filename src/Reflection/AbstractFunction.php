@@ -213,7 +213,11 @@ abstract class AbstractFunction
             $return = new ReflectionReturnValue(array_shift($signature), $this->returnDesc);
             $tmp    = [];
             foreach ($signature as $key => $type) {
-                $param = new ReflectionParameter($params[$key], $type, (isset($this->paramDesc[$key]) ? $this->paramDesc[$key] : null));
+                $param = new ReflectionParameter(
+                    $params[$key],
+                    $type,
+                    (isset($this->paramDesc[$key]) ? $this->paramDesc[$key] : null)
+                );
                 $param->setPosition($key);
                 $tmp[] = $param;
             }

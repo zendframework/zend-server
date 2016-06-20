@@ -21,22 +21,28 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testReflectClass()
     {
-        $reflection = Reflection::reflectClass('ZendTest\Server\ReflectionTestClass');
+        $reflection = Reflection::reflectClass(TestAsset\ReflectionTestClass::class);
         $this->assertInstanceOf('Zend\Server\Reflection\ReflectionClass', $reflection);
 
-        $reflection = Reflection::reflectClass(new ReflectionTestClass());
+        $reflection = Reflection::reflectClass(new TestAsset\ReflectionTestClass());
         $this->assertInstanceOf('Zend\Server\Reflection\ReflectionClass', $reflection);
     }
 
     public function testReflectClassThrowsExceptionOnInvalidClass()
     {
-        $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'Invalid argv argument passed to reflectClass');
-        $reflection = Reflection::reflectClass('ZendTest\Server\ReflectionTestClass', 'string');
+        $this->setExpectedException(
+            Reflection\Exception\InvalidArgumentException::class,
+            'Invalid argv argument passed to reflectClass'
+        );
+        $reflection = Reflection::reflectClass(TestAsset\ReflectionTestClass::class, 'string');
     }
 
     public function testReflectClassThrowsExceptionOnInvalidParameter()
     {
-        $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'Invalid class or object passed to attachClass');
+        $this->setExpectedException(
+            Reflection\Exception\InvalidArgumentException::class,
+            'Invalid class or object passed to attachClass'
+        );
         $reflection = Reflection::reflectClass(false);
     }
 
@@ -45,7 +51,7 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testReflectClass2()
     {
-        $reflection = Reflection::reflectClass('ZendTest\Server\ReflectionTestClass', false, 'zsr');
+        $reflection = Reflection::reflectClass(TestAsset\ReflectionTestClass::class, false, 'zsr');
         $this->assertEquals('zsr', $reflection->getNamespace());
     }
 
@@ -54,14 +60,14 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testReflectFunction()
     {
-        $reflection = Reflection::reflectFunction('ZendTest\Server\reflectionTestFunction');
+        $reflection = Reflection::reflectFunction('ZendTest\Server\TestAsset\reflectionTestFunction');
         $this->assertInstanceOf('Zend\Server\Reflection\ReflectionFunction', $reflection);
     }
 
     public function testReflectFunctionThrowsExceptionOnInvalidFunction()
     {
         $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'Invalid function');
-        $reflection = Reflection::reflectFunction('ZendTest\Server\ReflectionTestClass', 'string');
+        $reflection = Reflection::reflectFunction(TestAsset\ReflectionTestClass::class, 'string');
     }
 
     public function testReflectFunctionThrowsExceptionOnInvalidParam()
@@ -75,74 +81,7 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testReflectFunction2()
     {
-        $reflection = Reflection::reflectFunction('ZendTest\Server\reflectionTestFunction', false, 'zsr');
+        $reflection = Reflection::reflectFunction('ZendTest\Server\TestAsset\reflectionTestFunction', false, 'zsr');
         $this->assertEquals('zsr', $reflection->getNamespace());
-    }
-}
-
-/**
- * \ZendTest\Server\reflectionTestClass
- *
- * Used to test reflectFunction generation of signatures
- *
- * @param  bool $arg1
- * @param string|array $arg2
- * @param string $arg3 Optional argument
- * @param string|struct|false $arg4 Optional argument
- * @return bool|array
- */
-function reflectionTestFunction($arg1, $arg2, $arg3 = 'string', $arg4 = 'array')
-{
-}
-
-/**
- * \ZendTest\Server\ReflectionTestClass -- test class reflection
- */
-class ReflectionTestClass
-{
-    /**
-     * Constructor
-     *
-     * This shouldn't be reflected
-     *
-     * @param mixed $arg
-     */
-    public function __construct($arg = null)
-    {
-    }
-
-    /**
-     * Public one
-     *
-     * @param string $arg1
-     * @param array $arg2
-     * @return string
-     */
-    public function one($arg1, $arg2 = null)
-    {
-    }
-
-    /**
-     * Protected _one
-     *
-     * Should not be reflected
-     *
-     * @param string $arg1
-     * @param array $arg2
-     * @return string
-     */
-    protected function _one($arg1, $arg2 = null)
-    {
-    }
-
-    /**
-     * Public two
-     *
-     * @param string $arg1
-     * @param string $arg2
-     * @return bool|array
-     */
-    public static function two($arg1, $arg2)
-    {
     }
 }

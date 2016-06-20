@@ -150,7 +150,11 @@ class Callback
     public function setType($type)
     {
         if (!in_array($type, $this->types)) {
-            throw new Server\Exception\InvalidArgumentException('Invalid method callback type "' . $type . '" passed to ' . __CLASS__ . '::' . __METHOD__);
+            throw new Server\Exception\InvalidArgumentException(sprintf(
+                'Invalid method callback type "%s" passed to %s',
+                $type,
+                __METHOD__
+            ));
         }
         $this->type = $type;
         return $this;
