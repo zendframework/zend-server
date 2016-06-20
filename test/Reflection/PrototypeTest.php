@@ -22,19 +22,19 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
      * \Zend\Server\Reflection\Prototype object
      * @var \Zend\Server\Reflection\Prototype
      */
-    protected $_r;
+    protected $r;
 
     /**
      * Array of ReflectionParameters
      * @var array
      */
-    protected $_parametersRaw;
+    protected $parametersRaw;
 
     /**
      * Array of \Zend\Server\Reflection\Parameters
      * @var array
      */
-    protected $_parameters;
+    protected $parameters;
 
     /**
      * Setup environment
@@ -44,15 +44,15 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
         $class = new \ReflectionClass('\Zend\Server\Reflection');
         $method = $class->getMethod('reflectClass');
         $parameters = $method->getParameters();
-        $this->_parametersRaw = $parameters;
+        $this->parametersRaw = $parameters;
 
         $fParameters = [];
         foreach ($parameters as $p) {
             $fParameters[] = new Reflection\ReflectionParameter($p);
         }
-        $this->_parameters = $fParameters;
+        $this->parameters = $fParameters;
 
-        $this->_r = new Reflection\Prototype(new Reflection\ReflectionReturnValue('void', 'No return'));
+        $this->r = new Reflection\Prototype(new Reflection\ReflectionReturnValue('void', 'No return'));
     }
 
     /**
@@ -60,9 +60,9 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->_r);
-        unset($this->_parameters);
-        unset($this->_parametersRaw);
+        unset($this->r);
+        unset($this->parameters);
+        unset($this->parametersRaw);
     }
 
     /**
@@ -78,13 +78,16 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWorks()
     {
-        $this->assertInstanceOf('Zend\Server\Reflection\Prototype', $this->_r);
+        $this->assertInstanceOf('Zend\Server\Reflection\Prototype', $this->r);
     }
 
     public function testConstructionThrowsExceptionOnInvalidParam()
     {
-        $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'One or more params are invalid');
-        $r1 = new Reflection\Prototype($this->_r->getReturnValue(), $this->_parametersRaw);
+        $this->setExpectedException(
+            'Zend\Server\Reflection\Exception\InvalidArgumentException',
+            'One or more params are invalid'
+        );
+        $r1 = new Reflection\Prototype($this->r->getReturnValue(), $this->parametersRaw);
     }
 
     /**
@@ -96,7 +99,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetReturnType()
     {
-        $this->assertEquals('void', $this->_r->getReturnType());
+        $this->assertEquals('void', $this->r->getReturnType());
     }
 
     /**
@@ -108,7 +111,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetReturnValue()
     {
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionReturnValue', $this->_r->getReturnValue());
+        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionReturnValue', $this->r->getReturnValue());
     }
 
     /**
@@ -120,7 +123,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetParameters()
     {
-        $r = new Reflection\Prototype($this->_r->getReturnValue(), $this->_parameters);
+        $r = new Reflection\Prototype($this->r->getReturnValue(), $this->parameters);
         $p = $r->getParameters();
 
         $this->assertInternalType('array', $p);
@@ -128,6 +131,6 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
             $this->assertInstanceOf('Zend\Server\Reflection\ReflectionParameter', $parameter);
         }
 
-        $this->assertEquals($this->_parameters, $p);
+        $this->assertEquals($this->parameters, $p);
     }
 }

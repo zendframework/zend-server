@@ -30,7 +30,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
      *
      * Returns: void
      */
-    public function test__construct()
+    public function testConstructor()
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
         $this->assertInstanceOf('Zend\Server\Reflection\ReflectionClass', $r);
@@ -57,7 +57,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
      *
      * Returns: mixed
      */
-    public function test__call()
+    public function testMethodOverloading()
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
         $this->assertInternalType('string', $r->getName());
@@ -110,7 +110,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
      *
      * Returns: void
      */
-    public function test__wakeup()
+    public function testClassWakeup()
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
         $s = serialize($r);

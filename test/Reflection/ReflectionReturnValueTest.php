@@ -29,7 +29,7 @@ class ReflectionReturnValueTest extends \PHPUnit_Framework_TestCase
      *
      * Returns: void
      */
-    public function test__construct()
+    public function testConstructor()
     {
         $obj = new Reflection\ReflectionReturnValue();
         $this->assertInstanceOf('Zend\Server\Reflection\ReflectionReturnValue', $obj);
