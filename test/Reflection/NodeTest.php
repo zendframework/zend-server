@@ -21,7 +21,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
     /**
      * __construct() test
      */
-    public function test__construct()
+    public function testConstructor()
     {
         $node = new Node('string');
         $this->assertInstanceOf('Zend\Server\Reflection\Node', $node);
@@ -173,6 +173,10 @@ class NodeTest extends \PHPUnit_Framework_TestCase
             'child2grand2great2'
         ];
 
-        $this->assertEquals($test, $endPointsArray, 'Test was [' . var_export($test, 1) . ']; endPoints were [' . var_export($endPointsArray, 1) . ']');
+        $this->assertEquals(
+            $test,
+            $endPointsArray,
+            'Test was [' . var_export($test, 1) . ']; endPoints were [' . var_export($endPointsArray, 1) . ']'
+        );
     }
 }

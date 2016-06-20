@@ -18,7 +18,7 @@ use Zend\Server\Reflection;
  */
 class ReflectionParameterTest extends \PHPUnit_Framework_TestCase
 {
-    protected function _getParameter()
+    protected function getParameter()
     {
         $method = new \ReflectionMethod('\Zend\Server\Reflection\ReflectionParameter', 'setType');
         $parameters = $method->getParameters();
@@ -37,9 +37,9 @@ class ReflectionParameterTest extends \PHPUnit_Framework_TestCase
      *
      * Returns: void
      */
-    public function test__construct()
+    public function testConstructor()
     {
-        $parameter = $this->_getParameter();
+        $parameter = $this->getParameter();
 
         $reflection = new Reflection\ReflectionParameter($parameter);
         $this->assertInstanceOf('Zend\Server\Reflection\ReflectionParameter', $reflection);
@@ -56,9 +56,9 @@ class ReflectionParameterTest extends \PHPUnit_Framework_TestCase
      *
      * Returns: mixed
      */
-    public function test__call()
+    public function testMethodOverloading()
     {
-        $r = new Reflection\ReflectionParameter($this->_getParameter());
+        $r = new Reflection\ReflectionParameter($this->getParameter());
 
         // just test a few call proxies...
         $this->assertInternalType('bool', $r->allowsNull());
@@ -70,7 +70,7 @@ class ReflectionParameterTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSetType()
     {
-        $r = new Reflection\ReflectionParameter($this->_getParameter());
+        $r = new Reflection\ReflectionParameter($this->getParameter());
         $this->assertEquals('mixed', $r->getType());
 
         $r->setType('string');
@@ -82,7 +82,7 @@ class ReflectionParameterTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDescription()
     {
-        $r = new Reflection\ReflectionParameter($this->_getParameter());
+        $r = new Reflection\ReflectionParameter($this->getParameter());
         $this->assertEquals('', $r->getDescription());
 
         $r->setDescription('parameter description');
@@ -94,7 +94,7 @@ class ReflectionParameterTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetPosition()
     {
-        $r = new Reflection\ReflectionParameter($this->_getParameter());
+        $r = new Reflection\ReflectionParameter($this->getParameter());
         $this->assertEquals(null, $r->getPosition());
 
         $r->setPosition(3);
