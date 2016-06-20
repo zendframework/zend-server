@@ -11,67 +11,17 @@ namespace ZendTest\Server\Reflection;
 
 use Zend\Server\Reflection;
 
-/**
- * Interface ReflectionMethodInterface
- */
-interface ReflectionMethodInterface
-{
-    /**
-     * Test method
-     *
-     * @param ReflectionMethodTest $reflectionMethodTest Reflection method
-     * @param array                $anything             Some array information
-     */
-    public function testMethod(ReflectionMethodTest $reflectionMethodTest, array $anything);
-}
-
-/**
- * Class ReflectionMethodTestInstance
- * for testing only
- */
-class ReflectionMethodTestInstance implements ReflectionMethodInterface
-{
-
-    /**
-     * {@inheritdoc}
-     */
-    public function testMethod(ReflectionMethodTest $reflectionMethodTest, array $anything)
-    {
-        // it doesn`t matter
-    }
-}
-
-/**
- * Class ReflectionMethodNode
- * for testing only
- */
-class ReflectionMethodNode extends Reflection\Node
-{
-    /**
-     * {@inheritdoc}
-     */
-    public function setParent(Reflection\Node $node, $new = false)
-    {
-        // it doesn`t matter
-    }
-}
-
-/**
- * Test case for \Zend\Server\Reflection\ReflectionMethod
- *
- * @group      Zend_Server
- */
 class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
 {
-    protected $_classRaw;
-    protected $_class;
-    protected $_method;
+    protected $classRaw;
+    protected $class;
+    protected $method;
 
     protected function setUp()
     {
-        $this->_classRaw = new \ReflectionClass('\Zend\Server\Reflection');
-        $this->_method   = $this->_classRaw->getMethod('reflectClass');
-        $this->_class    = new Reflection\ReflectionClass($this->_classRaw);
+        $this->classRaw = new \ReflectionClass('\Zend\Server\Reflection');
+        $this->method   = $this->classRaw->getMethod('reflectClass');
+        $this->class    = new Reflection\ReflectionClass($this->classRaw);
     }
 
     /**
@@ -87,13 +37,13 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
      *
      * Returns: void
      */
-    public function test__construct()
+    public function testConstructor()
     {
-        $r = new Reflection\ReflectionMethod($this->_class, $this->_method);
+        $r = new Reflection\ReflectionMethod($this->class, $this->method);
         $this->assertInstanceOf('Zend\Server\Reflection\ReflectionMethod', $r);
         $this->assertInstanceOf('Zend\Server\Reflection\AbstractFunction', $r);
 
-        $r = new Reflection\ReflectionMethod($this->_class, $this->_method, 'namespace');
+        $r = new Reflection\ReflectionMethod($this->class, $this->method, 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
     }
 
@@ -106,12 +56,12 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDeclaringClass()
     {
-        $r = new Reflection\ReflectionMethod($this->_class, $this->_method);
+        $r = new Reflection\ReflectionMethod($this->class, $this->method);
 
         $class = $r->getDeclaringClass();
 
         $this->assertInstanceOf('Zend\Server\Reflection\ReflectionClass', $class);
-        $this->assertEquals($this->_class, $class);
+        $this->assertEquals($this->class, $class);
     }
 
     /**
@@ -121,9 +71,9 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
      *
      * Returns: void
      */
-    public function test__wakeup()
+    public function testClassWakeup()
     {
-        $r = new Reflection\ReflectionMethod($this->_class, $this->_method);
+        $r = new Reflection\ReflectionMethod($this->class, $this->method);
         $s = serialize($r);
         $u = unserialize($s);
 
@@ -138,10 +88,13 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethodDocBlockFromInterface()
     {
-        $reflectionClass = new \ReflectionClass('ZendTest\Server\Reflection\ReflectionMethodTestInstance');
+        $reflectionClass = new \ReflectionClass(TestAsset\ReflectionMethodTestInstance::class);
         $reflectionMethod = $reflectionClass->getMethod('testMethod');
 
-        $zendReflectionMethod = new Reflection\ReflectionMethod(new Reflection\ReflectionClass($reflectionClass), $reflectionMethod);
+        $zendReflectionMethod = new Reflection\ReflectionMethod(
+            new Reflection\ReflectionClass($reflectionClass),
+            $reflectionMethod
+        );
         list($prototype) = $zendReflectionMethod->getPrototypes();
         list($first, $second) = $prototype->getParameters();
 
@@ -154,10 +107,13 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethodDocBlockFromParent()
     {
-        $reflectionClass = new \ReflectionClass('ZendTest\Server\Reflection\ReflectionMethodNode');
+        $reflectionClass = new \ReflectionClass(TestAsset\ReflectionMethodNode::class);
         $reflectionMethod = $reflectionClass->getMethod('setParent');
 
-        $zendReflectionMethod = new Reflection\ReflectionMethod(new Reflection\ReflectionClass($reflectionClass), $reflectionMethod);
+        $zendReflectionMethod = new Reflection\ReflectionMethod(
+            new Reflection\ReflectionClass($reflectionClass),
+            $reflectionMethod
+        );
         $prototypes = $zendReflectionMethod->getPrototypes();
         list($first, $second) = $prototypes[1]->getParameters();
 

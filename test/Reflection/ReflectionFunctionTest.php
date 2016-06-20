@@ -16,7 +16,7 @@ use Zend\Server\Reflection;
  */
 class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
 {
-    public function test__construct()
+    public function testConstructor()
     {
         $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
@@ -37,7 +37,7 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($prototypes);
     }
 
-    public function test__getSet()
+    public function testPropertyOverloading()
     {
         $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
@@ -109,7 +109,7 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($argv, $args);
     }
 
-    public function test__wakeup()
+    public function testClassWakeup()
     {
         $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);

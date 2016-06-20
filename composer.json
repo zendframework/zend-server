@@ -30,6 +30,9 @@
     "autoload-dev": {
         "psr-4": {
             "ZendTest\\Server\\": "test/"
-        }
+        },
+        "files": [
+            "test/TestAsset/reflectionTestFunction.php"
+        ]
     }
 }
