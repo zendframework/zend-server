@@ -44,7 +44,7 @@ class Reflection
             throw new Reflection\Exception\InvalidArgumentException('Invalid class or object passed to attachClass()');
         }
 
-        if ($argv && !is_array($argv)) {
+        if ($argv && ! is_array($argv)) {
             throw new Reflection\Exception\InvalidArgumentException('Invalid argv argument passed to reflectClass');
         }
 
@@ -70,14 +70,14 @@ class Reflection
      */
     public static function reflectFunction($function, $argv = false, $namespace = '')
     {
-        if (!is_string($function) || !function_exists($function)) {
+        if (! is_string($function) || ! function_exists($function)) {
             throw new Reflection\Exception\InvalidArgumentException(sprintf(
                 'Invalid function "%s" passed to reflectFunction',
                 $function
             ));
         }
 
-        if ($argv && !is_array($argv)) {
+        if ($argv && ! is_array($argv)) {
             throw new Reflection\Exception\InvalidArgumentException('Invalid argv argument passed to reflectFunction');
         }
 

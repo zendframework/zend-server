@@ -108,7 +108,7 @@ class Definition
     {
         if (is_array($callback)) {
             $callback = new Callback($callback);
-        } elseif (!$callback instanceof Callback) {
+        } elseif (! $callback instanceof Callback) {
             throw new Server\Exception\InvalidArgumentException('Invalid method callback provided');
         }
         $this->callback = $callback;
@@ -136,7 +136,7 @@ class Definition
     {
         if (is_array($prototype)) {
             $prototype = new Prototype($prototype);
-        } elseif (!$prototype instanceof Prototype) {
+        } elseif (! $prototype instanceof Prototype) {
             throw new Server\Exception\InvalidArgumentException('Invalid method prototype provided');
         }
         $this->prototypes[] = $prototype;
@@ -211,7 +211,7 @@ class Definition
      */
     public function setObject($object)
     {
-        if (!is_object($object) && (null !== $object)) {
+        if (! is_object($object) && (null !== $object)) {
             throw new Server\Exception\InvalidArgumentException(sprintf(
                 'Invalid object passed to %s',
                 __METHOD__

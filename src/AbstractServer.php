@@ -91,7 +91,7 @@ abstract class AbstractServer implements Server
         $name       = $reflection->getName();
         $method     = empty($ns) ? $name : $ns . '.' . $name;
 
-        if (!$this->overwriteExistingMethods && $this->table->hasMethod($method)) {
+        if (! $this->overwriteExistingMethods && $this->table->hasMethod($method)) {
             throw new Exception\RuntimeException('Duplicate method registered: ' . $method);
         }
 
@@ -153,9 +153,9 @@ abstract class AbstractServer implements Server
         }
 
         $object = $invokable->getObject();
-        if (!is_object($object)) {
+        if (! is_object($object)) {
             $invokeArgs = $invokable->getInvokeArguments();
-            if (!empty($invokeArgs)) {
+            if (! empty($invokeArgs)) {
                 $reflection = new ReflectionClass($class);
                 $object     = $reflection->newInstanceArgs($invokeArgs);
             } else {

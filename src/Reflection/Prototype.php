@@ -31,7 +31,7 @@ class Prototype
         $this->return = $return;
 
         foreach ($params as $param) {
-            if (!$param instanceof ReflectionParameter) {
+            if (! $param instanceof ReflectionParameter) {
                 throw new Exception\InvalidArgumentException('One or more params are invalid');
             }
         }

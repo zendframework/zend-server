@@ -63,7 +63,7 @@ class Definition implements Countable, Iterator
     {
         if (is_array($method)) {
             $method = new Method\Definition($method);
-        } elseif (!$method instanceof Method\Definition) {
+        } elseif (! $method instanceof Method\Definition) {
             throw new Exception\InvalidArgumentException('Invalid method provided');
         }
 
@@ -79,7 +79,7 @@ class Definition implements Countable, Iterator
             throw new Exception\InvalidArgumentException('No method name provided');
         }
 
-        if (!$this->overwriteExistingMethods && array_key_exists($name, $this->methods)) {
+        if (! $this->overwriteExistingMethods && array_key_exists($name, $this->methods)) {
             throw new Exception\InvalidArgumentException(sprintf('Method by name of "%s" already exists', $name));
         }
         $this->methods[$name] = $method;

@@ -156,7 +156,7 @@ class ReflectionClass
             return;
         }
 
-        if (!is_string($namespace) || !preg_match('/[a-z0-9_\.]+/i', $namespace)) {
+        if (! is_string($namespace) || ! preg_match('/[a-z0-9_\.]+/i', $namespace)) {
             throw new Exception\InvalidArgumentException('Invalid namespace');
         }
 
