@@ -43,8 +43,10 @@ class ReflectionTestClass
      * @param array $arg2
      * @return string
      */
+    // @codingStandardsIgnoreStart
     protected function _one($arg1, $arg2 = null)
     {
+        // @codingStandardsIgnoreEnd
     }
 
     /**
