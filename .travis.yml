@@ -47,21 +47,17 @@ matrix:
     - php: 7
       env:
         - DEPS=latest
-    - php: hhvm 
+    - php: hhvm
       env:
         - DEPS=lowest
-    - php: hhvm 
+    - php: hhvm
       env:
         - DEPS=locked
-    - php: hhvm 
+    - php: hhvm
       env:
         - DEPS=latest
   allow_failures:
     - php: hhvm
-
-notifications:
-  irc: "irc.freenode.org#zftalk.dev"
-  email: false
 
 before_install:
   - travis_retry composer self-update
@@ -85,3 +81,16 @@ after_success:
 
 after_script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then ./vendor/bin/coveralls ; fi
+
+notifications:
+  email: false
+  irc:
+    channels:
+      - "irc.freenode.org#zftalk.dev"
+    on_success: change
+    on_failure: always
+  slack:
+    rooms:
+      - secure:  "pvyJ2p0BetH6DNuRRFjU2so7oSlUKu6ddG4gLiN6Wdtl/M3SGS0Kg5TkBmr9FOTjzKNR2esR19mhWFHYzwyh/tc9ODpt6aKIAIdEm7DfKq73wMJQob+RSqVp1N9YSyCiQ7obSdUFJ/jxsu+6cgbiQpCbTz4nJdCs5Y+2lyEfeS0BTbgCjgF1xg/VN9uau4cK/oO7kH/RpDK4/VMSGVUYj+guB1xqc7WCGJQL7IBdcVl+E6cUxTyvWcIAn3ZVS1ezxM5PniNULFw1AdMC5Vwu/NRzvPftv3mov1AFlnwZjlJWputEpYVSOL0NZus/A6QD2GD4SAbOX4V3vUY+gV68toH6gAt8ThdC5MPEmDZC1Vi7W2EtV5IQFYg3X6Dx5+XvtN8wFJ4qdZfDqGDJg4uqjykubqaD1fbCMptSa/SvX2YhfCMMZXYFwBrfF350jKwvehRK5/AX9PFpswrj4rKIXx0bh8AtYzhZg2P5wj/FHPH2xDJHKoNl+c9AUbAdNR67Do2INu8JsLROCXzx9VrhQaZvCrhgdP2lIBaEfTftq8wCmus3S8eoTcrGXh79XrlgnES2+nPcC3Hln4XKYwE2h+ewRwbTjgrwHXOFz3kRtUconRM5Bz+KvbMzYox+U1xDg1NXQd3hAPi3PlozxCQbYOGsFVvFnfmqIumkIK0buBg="
+    on_success: change
+    on_failure: always
