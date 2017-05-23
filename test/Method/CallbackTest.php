@@ -75,6 +75,13 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $this->callback->getFunction());
     }
 
+    public function testFunctionMayBeCallable()
+    {
+        $callable = function () {};
+        $this->callback->setFunction($callable);
+        $this->assertEquals($callable, $this->callback->getFunction());
+    }
+
     public function testTypeShouldBeNullByDefault()
     {
         $this->assertNull($this->callback->getType());
