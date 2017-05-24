@@ -22,7 +22,7 @@ class Callback
     protected $class;
 
     /**
-     * @var string Function name for function callback
+     * @var string|callable Function name or callable for function callback
      */
     protected $function;
 
@@ -98,12 +98,12 @@ class Callback
     /**
      * Set callback function
      *
-     * @param  string $function
+     * @param  string|callable $function
      * @return \Zend\Server\Method\Callback
      */
     public function setFunction($function)
     {
-        $this->function = (string) $function;
+        $this->function = is_callable($function) ? $function : (string) $function;
         $this->setType('function');
         return $this;
     }
@@ -111,7 +111,7 @@ class Callback
     /**
      * Get callback function
      *
-     * @return null|string
+     * @return null|string|callable
      */
     public function getFunction()
     {
@@ -144,7 +144,7 @@ class Callback
      * Set callback type
      *
      * @param  string $type
-     * @return Callback
+     * @return \Zend\Server\Method\Callback
      * @throws Server\Exception\InvalidArgumentException
      */
     public function setType($type)
