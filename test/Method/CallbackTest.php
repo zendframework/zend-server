@@ -19,6 +19,11 @@ use Zend\Server\Method;
 class CallbackTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @var Method\Callback
+     */
+    private $callback;
+
+    /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      *
@@ -27,16 +32,6 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->callback = new Method\Callback();
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
     }
 
     public function testClassShouldBeNullByDefault()
@@ -77,7 +72,9 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testFunctionMayBeCallable()
     {
-        $callable = function () {};
+        $callable = function () {
+            return true;
+        };
         $this->callback->setFunction($callable);
         $this->assertEquals($callable, $this->callback->getFunction());
     }
