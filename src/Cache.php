@@ -51,6 +51,12 @@ class Cache
                 $definition->addMethod($method);
             }
             $methods = $definition;
+        } elseif (is_array($methods)) {
+            foreach (array_keys($methods) as $methodName) {
+                if (in_array($methodName, static::$skipMethods)) {
+                    unset($methods[$methodName]);
+                }
+            }
         }
 
         ErrorHandler::start();
