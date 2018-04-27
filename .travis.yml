@@ -2,25 +2,14 @@ sudo: false
 
 language: php
 
-branches:
-  except:
-    - /^release-.*$/
-    - /^ghgfk-.*$/
-
 cache:
   directories:
     - $HOME/.composer/cache
-    - $HOME/.local
-    - zf-mkdoc-theme
 
 env:
   global:
-    - COMPOSER_ARGS="--no-interaction --ignore-platform-reqs"
-    - SITE_URL=https://zendframework.github.io/zend-server
-    - GH_USER_NAME="Matthew Weier O'Phinney"
-    - GH_USER_EMAIL=matthew@weierophinney.net
-    - GH_REF=github.com/zendframework/zend-server.git
-    - secure: "mC9p7uCm+nD72XFKyMxK9AprWHl6xzq1iuz5Hg9AUpGxHskemnBugCWaet8YsZpIsEBlT6BWH0xzT3AB5RMYdLJS0ctV5xCEd2FccPPvEGdxmrGQZl+vIf60xOv8O+zy37gXOH5tmce+KMpGOsZ4Zz+4RKU5F3Lz2/AmrBUdKvA+k/ZGoHWQfTfBugi5ej0hU+yzsmk6qbw7Q9ViuuLY3OsTTnLQKXGDk+7pvYBpfMpSOHZ5GL14ZYxC56k2PCjcKZIaev4Py8IqFJVXdnMxrqGWnt8bWxQkQaKLwZGtw3a8BVbgChixGNvdiZXd3EmK16xpNHhhGV75VVx6EBgEU7lfsv/2bAy/1KCUt79vLXB3awoex9+Yeof3fxNpldVNHb9x5XwxykRP1AXVkB6SSDrRovgtjqmCYN/97KMXwfLx6xD1OtIfztfIYQHd5WpU8ddLf2ObSsdzM8bTbcEuD9TUwwSeLYgRLzL4LjboRqR1bCtJ60VQge6Tpj8n0lMAnGnhvZoszQfO1YreHAeLeDMMmG+eCYx0RzLmwsac5jGB3OjcHde3NpxsCtX4Xcb91G3e+ZT1R1CaFA+en8rNqOdfWIJljyiIa5yC9ddt/DzruPQdoCBKLdcEhrUPTlzY74rnaR4VMuha19nG6PW+FqkqtFTuuaLTrtzdpldVv+o="
+    - COMPOSER_ARGS="--no-interaction"
+    - COVERAGE_DEPS="php-coveralls/php-coveralls"
 
 matrix:
   include:
@@ -30,56 +19,58 @@ matrix:
     - php: 5.6
       env:
         - DEPS=locked
-        - DEPLOY_DOCS="$(if [[ $TRAVIS_BRANCH == 'master' && $TRAVIS_PULL_REQUEST == 'false' ]]; then echo -n 'true' ; else echo -n 'false' ; fi)"
-        - PATH="$HOME/.local/bin:$PATH"
+        - LEGACY_DEPS="phpunit/phpunit"
     - php: 5.6
       env:
         - DEPS=latest
-        - TEST_COVERAGE=true
     - php: 7
       env:
         - DEPS=lowest
     - php: 7
+      env:
+        - DEPS=locked
+        - LEGACY_DEPS="phpunit/phpunit"
+    - php: 7
+      env:
+        - DEPS=latest
+    - php: 7.1
+      env:
+        - DEPS=lowest
+    - php: 7.1
       env:
         - DEPS=locked
         - CS_CHECK=true
-    - php: 7
+        - TEST_COVERAGE=true
+    - php: 7.1
       env:
         - DEPS=latest
-    - php: hhvm 
+    - php: 7.2
       env:
         - DEPS=lowest
-    - php: hhvm 
+    - php: 7.2
       env:
         - DEPS=locked
-    - php: hhvm 
+    - php: 7.2
       env:
         - DEPS=latest
-  allow_failures:
-    - php: hhvm
-
-notifications:
-  irc: "irc.freenode.org#zftalk.dev"
-  email: false
 
 before_install:
-  - travis_retry composer self-update
-  - if [[ $TRAVIS_PHP_VERSION != "hhvm" && $TEST_COVERAGE != 'true' ]]; then phpenv config-rm xdebug.ini ; fi
+  - if [[ $TEST_COVERAGE != 'true' ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
 
 install:
+  - travis_retry composer install $COMPOSER_ARGS --ignore-platform-reqs
+  - if [[ $LEGACY_DEPS != '' ]]; then travis_retry composer update $COMPOSER_ARGS --with-dependencies $LEGACY_DEPS ; fi
   - if [[ $DEPS == 'latest' ]]; then travis_retry composer update $COMPOSER_ARGS ; fi
   - if [[ $DEPS == 'lowest' ]]; then travis_retry composer update --prefer-lowest --prefer-stable $COMPOSER_ARGS ; fi
-  - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry composer require --dev $COMPOSER_ARGS php-coveralls/php-coveralls ; fi
-  - travis_retry composer install $COMPOSER_ARGS
-  - composer show
+  - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry composer require --dev $COMPOSER_ARGS $COVERAGE_DEPS ; fi
+  - stty cols 120 && composer show
 
 script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then composer test-coverage ; else composer test ; fi
   - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
-  - if [[ $DEPLOY_DOCS == "true" && "$TRAVIS_TEST_RESULT" == "0" ]]; then wget -O theme-installer.sh "https://raw.githubusercontent.com/zendframework/zf-mkdoc-theme/master/theme-installer.sh" ; chmod 755 theme-installer.sh ; ./theme-installer.sh ; fi
-
-after_success:
-  - if [[ $DEPLOY_DOCS == "true" ]]; then echo "Preparing to build and deploy documentation" ; ./zf-mkdoc-theme/deploy.sh ; echo "Completed deploying documentation" ; fi
 
 after_script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry php vendor/bin/php-coveralls -v ; fi
+
+notifications:
+  email: false
