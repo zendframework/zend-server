@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
+- [#26](https://github.com/zendframework/zend-server/pull/26) adds support for PHP 7.1 and 7.2.
+
+### Changed
+
 - Nothing.
 
 ### Deprecated
@@ -14,7 +18,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#26](https://github.com/zendframework/zend-server/pull/26) removes support for HHVM.
 
 ### Fixed
 
