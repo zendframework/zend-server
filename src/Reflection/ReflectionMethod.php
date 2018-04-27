@@ -47,9 +47,9 @@ class ReflectionMethod extends AbstractFunction
         $classNamespace = $class->getNamespace();
 
         // Determine namespace
-        if (!empty($namespace)) {
+        if (! empty($namespace)) {
             $this->setNamespace($namespace);
-        } elseif (!empty($classNamespace)) {
+        } elseif (! empty($classNamespace)) {
             $this->setNamespace($classNamespace);
         }
 
@@ -126,7 +126,7 @@ class ReflectionMethod extends AbstractFunction
         // fetch doc blocks from interfaces
         $interfaceReflectionList = $this->classReflection->getInterfaces();
         foreach ($interfaceReflectionList as $interfaceReflection) {
-            if (!$interfaceReflection->hasMethod($currentMethodName)) {
+            if (! $interfaceReflection->hasMethod($currentMethodName)) {
                 continue;
             }
 
@@ -160,11 +160,11 @@ class ReflectionMethod extends AbstractFunction
     {
         $docComment = [];
         $parentReflectionClass = $reflectionClass->getParentClass();
-        if (!$parentReflectionClass) {
+        if (! $parentReflectionClass) {
             return;
         }
 
-        if (!$parentReflectionClass->hasMethod($methodName)) {
+        if (! $parentReflectionClass->hasMethod($methodName)) {
             return;
         }
 

@@ -149,7 +149,7 @@ class Callback
      */
     public function setType($type)
     {
-        if (!in_array($type, $this->types)) {
+        if (! in_array($type, $this->types)) {
             throw new Server\Exception\InvalidArgumentException(sprintf(
                 'Invalid method callback type "%s" passed to %s',
                 $type,

@@ -59,7 +59,7 @@ class ReflectionReturnValue
      */
     public function setType($type)
     {
-        if (!is_string($type) && (null !== $type)) {
+        if (! is_string($type) && (null !== $type)) {
             throw new Exception\InvalidArgumentException('Invalid parameter type');
         }
 
@@ -85,7 +85,7 @@ class ReflectionReturnValue
      */
     public function setDescription($description)
     {
-        if (!is_string($description) && (null !== $description)) {
+        if (! is_string($description) && (null !== $description)) {
             throw new Exception\InvalidArgumentException('Invalid parameter description');
         }
 

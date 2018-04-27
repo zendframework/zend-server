@@ -20,7 +20,7 @@
     },
     "require-dev": {
         "phpunit/phpUnit": "^4.8",
-        "squizlabs/php_codesniffer": "^2.3.1"
+        "zendframework/zend-coding-standard": "~1.0.0"
     },
     "autoload": {
         "psr-4": {
@@ -34,5 +34,16 @@
         "files": [
             "test/TestAsset/reflectionTestFunction.php"
         ]
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@test"
+        ],
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit --colors=always",
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+        "upload-coverage": "coveralls -v"
     }
 }

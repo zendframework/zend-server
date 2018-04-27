@@ -194,7 +194,7 @@ abstract class AbstractFunction
         }
 
         foreach ($endPoints as $node) {
-            if (!$node instanceof Node) {
+            if (! $node instanceof Node) {
                 continue;
             }
 
@@ -242,7 +242,7 @@ abstract class AbstractFunction
         $paramCount = $function->getNumberOfParameters();
         $parameters = $function->getParameters();
 
-        if (!$this->docComment) {
+        if (! $this->docComment) {
             $this->docComment = $function->getDocComment();
         }
 
@@ -376,7 +376,7 @@ abstract class AbstractFunction
             return;
         }
 
-        if (!is_string($namespace) || !preg_match('/[a-z0-9_\.]+/i', $namespace)) {
+        if (! is_string($namespace) || ! preg_match('/[a-z0-9_\.]+/i', $namespace)) {
             throw new Exception\InvalidArgumentException('Invalid namespace');
         }
 
@@ -402,7 +402,7 @@ abstract class AbstractFunction
      */
     public function setDescription($string)
     {
-        if (!is_string($string)) {
+        if (! is_string($string)) {
             throw new Exception\InvalidArgumentException('Invalid description');
         }
 
