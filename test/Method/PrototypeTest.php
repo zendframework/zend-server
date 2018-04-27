@@ -63,12 +63,12 @@ class PrototypeTest extends TestCase
         $this->prototype->addParameter('string');
         $params = $this->prototype->getParameters();
         $this->assertInternalType('array', $params);
-        $this->assertEquals(1, count($params));
+        $this->assertCount(1, $params);
         $this->assertEquals('string', $params[0]);
 
         $this->prototype->addParameter('array');
         $params = $this->prototype->getParameters();
-        $this->assertEquals(2, count($params));
+        $this->assertCount(2, $params);
         $this->assertEquals('string', $params[0]);
         $this->assertEquals('array', $params[1]);
     }

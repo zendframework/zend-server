@@ -121,6 +121,6 @@ class ReflectionClassTest extends TestCase
         $rMethods = $r->getMethods();
         $uMethods = $r->getMethods();
 
-        $this->assertEquals(count($rMethods), count($uMethods));
+        $this->assertCount(count($rMethods), $uMethods);
     }
 }

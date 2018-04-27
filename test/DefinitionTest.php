@@ -51,7 +51,7 @@ class DefinitionTest extends TestCase
         $method = new Method\Definition(['name' => 'foo']);
         $this->definition->addMethod($method);
         $methods = $this->definition->getMethods();
-        $this->assertEquals(1, count($methods));
+        $this->assertCount(1, $methods);
         $this->assertSame($method, $methods['foo']);
         $this->assertSame($method, $this->definition->getMethod('foo'));
     }
@@ -62,7 +62,7 @@ class DefinitionTest extends TestCase
         $method2 = new Method\Definition(['name' => 'bar']);
         $this->definition->addMethods([$method1, $method2]);
         $methods = $this->definition->getMethods();
-        $this->assertEquals(2, count($methods));
+        $this->assertCount(2, $methods);
         $this->assertSame($method1, $methods['foo']);
         $this->assertSame($method1, $this->definition->getMethod('foo'));
         $this->assertSame($method2, $methods['bar']);
@@ -128,7 +128,7 @@ class DefinitionTest extends TestCase
         $definition = new Server\Definition();
         $definition->addMethod($method);
         $test = $definition->toArray();
-        $this->assertEquals(1, count($test));
+        $this->assertCount(1, $test);
         $test = array_shift($test);
         $this->assertEquals($method['name'], $test['name']);
         $this->assertEquals($method['methodHelp'], $test['methodHelp']);
@@ -156,7 +156,7 @@ class DefinitionTest extends TestCase
         $options = [$method];
         $definition = new Server\Definition($options);
         $test = $definition->toArray();
-        $this->assertEquals(1, count($test));
+        $this->assertCount(1, $test);
         $test = array_shift($test);
         $this->assertEquals($method['name'], $test['name']);
         $this->assertEquals($method['methodHelp'], $test['methodHelp']);
