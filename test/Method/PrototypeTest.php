@@ -9,6 +9,7 @@ namespace ZendTest\Server\Method;
 
 use PHPUnit\Framework\TestCase;
 use Zend\Server\Method;
+use Zend\Server\Method\Parameter;
 
 /**
  * Test class for \Zend\Server\Method\Prototype
@@ -102,7 +103,7 @@ class PrototypeTest extends TestCase
         $this->prototype->addParameters(['string', 'array']);
         $parameters = $this->prototype->getParameterObjects();
         foreach ($parameters as $parameter) {
-            $this->assertInstanceOf('Zend\Server\Method\Parameter', $parameter);
+            $this->assertInstanceOf(Parameter::class, $parameter);
         }
     }
 

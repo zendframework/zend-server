@@ -9,6 +9,8 @@ namespace ZendTest\Server\Reflection;
 
 use PHPUnit\Framework\TestCase;
 use Zend\Server\Reflection;
+use Zend\Server\Reflection\ReflectionClass;
+use Zend\Server\Reflection\ReflectionMethod;
 
 /**
  * Test case for \Zend\Server\Reflection\ClassReflection
@@ -31,17 +33,17 @@ class ReflectionClassTest extends TestCase
      */
     public function testConstructor()
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionClass', $r);
+        $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
+        $this->assertInstanceOf(ReflectionClass::class, $r);
         $this->assertEquals('', $r->getNamespace());
 
         $methods = $r->getMethods();
         $this->assertInternalType('array', $methods);
         foreach ($methods as $m) {
-            $this->assertInstanceOf('Zend\Server\Reflection\ReflectionMethod', $m);
+            $this->assertInstanceOf(ReflectionMethod::class, $m);
         }
 
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'), 'namespace');
+        $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class), 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
     }
 
@@ -58,7 +60,7 @@ class ReflectionClassTest extends TestCase
      */
     public function testMethodOverloading()
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
         $this->assertInternalType('string', $r->getName());
         $this->assertEquals('Zend\Server\Reflection', $r->getName());
     }
@@ -68,7 +70,7 @@ class ReflectionClassTest extends TestCase
      */
     public function testGetSet()
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
         $r->system = true;
         $this->assertTrue($r->system);
     }
@@ -82,12 +84,12 @@ class ReflectionClassTest extends TestCase
      */
     public function testGetMethods()
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
 
         $methods = $r->getMethods();
         $this->assertInternalType('array', $methods);
         foreach ($methods as $m) {
-            $this->assertInstanceOf('Zend\Server\Reflection\ReflectionMethod', $m);
+            $this->assertInstanceOf(ReflectionMethod::class, $m);
         }
     }
 
@@ -96,7 +98,7 @@ class ReflectionClassTest extends TestCase
      */
     public function testGetNamespace()
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
         $this->assertEquals('', $r->getNamespace());
         $r->setNamespace('namespace');
         $this->assertEquals('namespace', $r->getNamespace());
@@ -111,11 +113,11 @@ class ReflectionClassTest extends TestCase
      */
     public function testClassWakeup()
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
         $s = serialize($r);
         $u = unserialize($s);
 
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionClass', $u);
+        $this->assertInstanceOf(ReflectionClass::class, $u);
         $this->assertEquals('', $u->getNamespace());
         $this->assertEquals($r->getName(), $u->getName());
         $rMethods = $r->getMethods();

@@ -8,6 +8,7 @@
 namespace ZendTest\Server\Reflection;
 
 use Zend\Server\Reflection;
+use Zend\Server\Reflection\ReflectionReturnValue;
 
 /**
  * Test case for \Zend\Server\Reflection\ReflectionReturnValue
@@ -30,7 +31,7 @@ class ReflectionReturnValueTest extends \PHPUnit\Framework\TestCase
     public function testConstructor()
     {
         $obj = new Reflection\ReflectionReturnValue();
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionReturnValue', $obj);
+        $this->assertInstanceOf(ReflectionReturnValue::class, $obj);
     }
 
     /**

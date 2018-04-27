@@ -10,6 +10,8 @@ namespace ZendTest\Server;
 use PHPUnit\Framework\TestCase;
 use Zend\Server\Reflection;
 use Zend\Server\Reflection\Exception\InvalidArgumentException;
+use Zend\Server\Reflection\ReflectionClass;
+use Zend\Server\Reflection\ReflectionFunction;
 
 /**
  * @group      Zend_Server
@@ -22,10 +24,10 @@ class ReflectionTest extends TestCase
     public function testReflectClass()
     {
         $reflection = Reflection::reflectClass(TestAsset\ReflectionTestClass::class);
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionClass', $reflection);
+        $this->assertInstanceOf(ReflectionClass::class, $reflection);
 
         $reflection = Reflection::reflectClass(new TestAsset\ReflectionTestClass());
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionClass', $reflection);
+        $this->assertInstanceOf(ReflectionClass::class, $reflection);
     }
 
     public function testReflectClassThrowsExceptionOnInvalidClass()
@@ -57,7 +59,7 @@ class ReflectionTest extends TestCase
     public function testReflectFunction()
     {
         $reflection = Reflection::reflectFunction('ZendTest\Server\TestAsset\reflectionTestFunction');
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionFunction', $reflection);
+        $this->assertInstanceOf(ReflectionFunction::class, $reflection);
     }
 
     public function testReflectFunctionThrowsExceptionOnInvalidFunction()

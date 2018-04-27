@@ -10,6 +10,7 @@ namespace ZendTest\Server\Reflection;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
 use Zend\Server\Reflection;
+use Zend\Server\Reflection\ReflectionParameter;
 
 /**
  * Test case for \Zend\Server\Reflection\ReflectionParameter
@@ -42,7 +43,7 @@ class ReflectionParameterTest extends TestCase
         $parameter = $this->getParameter();
 
         $reflection = new Reflection\ReflectionParameter($parameter);
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionParameter', $reflection);
+        $this->assertInstanceOf(ReflectionParameter::class, $reflection);
     }
 
     /**

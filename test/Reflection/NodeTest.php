@@ -23,14 +23,14 @@ class NodeTest extends TestCase
     public function testConstructor()
     {
         $node = new Node('string');
-        $this->assertInstanceOf('Zend\Server\Reflection\Node', $node);
+        $this->assertInstanceOf(Node::class, $node);
         $this->assertEquals('string', $node->getValue());
         $this->assertNull($node->getParent());
         $children = $node->getChildren();
         $this->assertEmpty($children);
 
         $child = new Node('array', $node);
-        $this->assertInstanceOf('Zend\Server\Reflection\Node', $child);
+        $this->assertInstanceOf(Node::class, $child);
         $this->assertEquals('array', $child->getValue());
         $this->assertEquals($node, $child->getParent());
         $children = $child->getChildren();
@@ -61,7 +61,7 @@ class NodeTest extends TestCase
         $parent = new Node('string');
         $child = $parent->createChild('array');
 
-        $this->assertInstanceOf('Zend\Server\Reflection\Node', $child);
+        $this->assertInstanceOf(Node::class, $child);
         $this->assertEquals($parent, $child->getParent());
         $children = $parent->getChildren();
         $this->assertEquals($child, $children[0]);

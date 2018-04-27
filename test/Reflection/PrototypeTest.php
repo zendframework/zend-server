@@ -11,6 +11,9 @@ use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use Zend\Server\Reflection;
 use Zend\Server\Reflection\Exception\InvalidArgumentException;
+use Zend\Server\Reflection\Prototype;
+use Zend\Server\Reflection\ReflectionReturnValue;
+use Zend\Server\Reflection\ReflectionParameter;
 
 /**
  * Test case for \Zend\Server\Reflection\Prototype
@@ -79,7 +82,7 @@ class PrototypeTest extends TestCase
      */
     public function testConstructWorks()
     {
-        $this->assertInstanceOf('Zend\Server\Reflection\Prototype', $this->r);
+        $this->assertInstanceOf(Prototype::class, $this->r);
     }
 
     public function testConstructionThrowsExceptionOnInvalidParam()
@@ -110,7 +113,7 @@ class PrototypeTest extends TestCase
      */
     public function testGetReturnValue()
     {
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionReturnValue', $this->r->getReturnValue());
+        $this->assertInstanceOf(ReflectionReturnValue::class, $this->r->getReturnValue());
     }
 
     /**
@@ -127,7 +130,7 @@ class PrototypeTest extends TestCase
 
         $this->assertInternalType('array', $p);
         foreach ($p as $parameter) {
-            $this->assertInstanceOf('Zend\Server\Reflection\ReflectionParameter', $parameter);
+            $this->assertInstanceOf(ReflectionParameter::class, $parameter);
         }
 
         $this->assertEquals($this->parameters, $p);

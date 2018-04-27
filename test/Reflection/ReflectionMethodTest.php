@@ -10,6 +10,9 @@ namespace ZendTest\Server\Reflection;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use Zend\Server\Reflection;
+use Zend\Server\Reflection\ReflectionMethod;
+use Zend\Server\Reflection\AbstractFunction;
+use Zend\Server\Reflection\Node;
 
 class ReflectionMethodTest extends TestCase
 {
@@ -19,7 +22,7 @@ class ReflectionMethodTest extends TestCase
 
     protected function setUp()
     {
-        $this->classRaw = new ReflectionClass('\Zend\Server\Reflection');
+        $this->classRaw = new ReflectionClass(Reflection::class);
         $this->method   = $this->classRaw->getMethod('reflectClass');
         $this->class    = new Reflection\ReflectionClass($this->classRaw);
     }
@@ -40,8 +43,8 @@ class ReflectionMethodTest extends TestCase
     public function testConstructor()
     {
         $r = new Reflection\ReflectionMethod($this->class, $this->method);
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionMethod', $r);
-        $this->assertInstanceOf('Zend\Server\Reflection\AbstractFunction', $r);
+        $this->assertInstanceOf(ReflectionMethod::class, $r);
+        $this->assertInstanceOf(AbstractFunction::class, $r);
 
         $r = new Reflection\ReflectionMethod($this->class, $this->method, 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
@@ -60,7 +63,7 @@ class ReflectionMethodTest extends TestCase
 
         $class = $r->getDeclaringClass();
 
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionClass', $class);
+        $this->assertInstanceOf(\Zend\Server\Reflection\ReflectionClass::class, $class);
         $this->assertEquals($this->class, $class);
     }
 
@@ -77,8 +80,8 @@ class ReflectionMethodTest extends TestCase
         $s = serialize($r);
         $u = unserialize($s);
 
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionMethod', $u);
-        $this->assertInstanceOf('Zend\Server\Reflection\AbstractFunction', $u);
+        $this->assertInstanceOf(ReflectionMethod::class, $u);
+        $this->assertInstanceOf(AbstractFunction::class, $u);
         $this->assertEquals($r->getName(), $u->getName());
         $this->assertEquals($r->getDeclaringClass()->getName(), $u->getDeclaringClass()->getName());
     }
@@ -117,7 +120,7 @@ class ReflectionMethodTest extends TestCase
         $prototypes = $zendReflectionMethod->getPrototypes();
         list($first, $second) = $prototypes[1]->getParameters();
 
-        self::assertEquals('\Zend\Server\Reflection\Node', $first->getType());
+        self::assertEquals('\\' . Node::class, $first->getType());
         self::assertEquals('bool', $second->getType());
     }
 }
