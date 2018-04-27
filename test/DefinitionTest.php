@@ -9,6 +9,7 @@
 
 namespace ZendTest\Server;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Server;
 use Zend\Server\Method;
 
@@ -17,7 +18,7 @@ use Zend\Server\Method;
  *
  * @group      Zend_Server
  */
-class DefinitionTest extends \PHPUnit_Framework_TestCase
+class DefinitionTest extends TestCase
 {
     /**
      * Sets up the fixture, for example, open a network connection.

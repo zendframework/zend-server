@@ -9,14 +9,17 @@
 
 namespace ZendTest\Server\Reflection;
 
+use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 use Zend\Server\Reflection;
+use Zend\Server\Reflection\Exception\InvalidArgumentException;
 
 /**
  * Test case for \Zend\Server\Reflection\Prototype
  *
  * @group      Zend_Server
  */
-class PrototypeTest extends \PHPUnit_Framework_TestCase
+class PrototypeTest extends TestCase
 {
     /**
      * \Zend\Server\Reflection\Prototype object
@@ -41,7 +44,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $class = new \ReflectionClass('\Zend\Server\Reflection');
+        $class = new ReflectionClass('\Zend\Server\Reflection');
         $method = $class->getMethod('reflectClass');
         $parameters = $method->getParameters();
         $this->parametersRaw = $parameters;
@@ -83,10 +86,8 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructionThrowsExceptionOnInvalidParam()
     {
-        $this->setExpectedException(
-            'Zend\Server\Reflection\Exception\InvalidArgumentException',
-            'One or more params are invalid'
-        );
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('One or more params are invalid');
         $r1 = new Reflection\Prototype($this->r->getReturnValue(), $this->parametersRaw);
     }
 

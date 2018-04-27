@@ -9,12 +9,14 @@
 
 namespace ZendTest\Server;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Server\Reflection;
+use Zend\Server\Reflection\Exception\InvalidArgumentException;
 
 /**
  * @group      Zend_Server
  */
-class ReflectionTest extends \PHPUnit_Framework_TestCase
+class ReflectionTest extends TestCase
 {
     /**
      * reflectClass() test
@@ -30,19 +32,15 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
 
     public function testReflectClassThrowsExceptionOnInvalidClass()
     {
-        $this->setExpectedException(
-            Reflection\Exception\InvalidArgumentException::class,
-            'Invalid argv argument passed to reflectClass'
-        );
+        $this->expectException(Reflection\Exception\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid argv argument passed to reflectClass');
         $reflection = Reflection::reflectClass(TestAsset\ReflectionTestClass::class, 'string');
     }
 
     public function testReflectClassThrowsExceptionOnInvalidParameter()
     {
-        $this->setExpectedException(
-            Reflection\Exception\InvalidArgumentException::class,
-            'Invalid class or object passed to attachClass'
-        );
+        $this->expectException(Reflection\Exception\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid class or object passed to attachClass');
         $reflection = Reflection::reflectClass(false);
     }
 
@@ -66,13 +64,15 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
 
     public function testReflectFunctionThrowsExceptionOnInvalidFunction()
     {
-        $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'Invalid function');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid function');
         $reflection = Reflection::reflectFunction(TestAsset\ReflectionTestClass::class, 'string');
     }
 
     public function testReflectFunctionThrowsExceptionOnInvalidParam()
     {
-        $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'Invalid function');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid function');
         $reflection = Reflection::reflectFunction(false);
     }
 

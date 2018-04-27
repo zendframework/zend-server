@@ -9,6 +9,8 @@
 
 namespace ZendTest\Server\Reflection;
 
+use PHPUnit\Framework\TestCase;
+use ReflectionMethod;
 use Zend\Server\Reflection;
 
 /**
@@ -16,11 +18,11 @@ use Zend\Server\Reflection;
  *
  * @group      Zend_Server
  */
-class ReflectionParameterTest extends \PHPUnit_Framework_TestCase
+class ReflectionParameterTest extends TestCase
 {
     protected function getParameter()
     {
-        $method = new \ReflectionMethod('\Zend\Server\Reflection\ReflectionParameter', 'setType');
+        $method = new ReflectionMethod('\Zend\Server\Reflection\ReflectionParameter', 'setType');
         $parameters = $method->getParameters();
         return $parameters[0];
     }

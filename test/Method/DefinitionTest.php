@@ -9,14 +9,16 @@
 
 namespace ZendTest\Server\Method;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Server\Method;
+use Zend\Server\Exception\InvalidArgumentException;
 
 /**
  * Test class for \Zend\Server\Method\Definition
  *
  * @group      Zend_Server
  */
-class DefinitionTest extends \PHPUnit_Framework_TestCase
+class DefinitionTest extends TestCase
 {
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -102,7 +104,8 @@ class DefinitionTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingObjectToNonObjectShouldThrowException()
     {
-        $this->setExpectedException('Zend\Server\Exception\InvalidArgumentException', 'Invalid object passed to');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid object passed to');
         $this->definition->setObject('foo');
     }
 

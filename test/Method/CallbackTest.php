@@ -9,14 +9,16 @@
 
 namespace ZendTest\Server\Method;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Server\Method;
+use Zend\Server\Exception\InvalidArgumentException;
 
 /**
  * Test class for \Zend\Server\Method\Callback
  *
  * @group      Zend_Server
  */
-class CallbackTest extends \PHPUnit_Framework_TestCase
+class CallbackTest extends TestCase
 {
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -89,7 +91,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingTypeShouldThrowExceptionWhenInvalidTypeProvided()
     {
-        $this->setExpectedException('Zend\Server\Exception\InvalidArgumentException', 'Invalid method callback type');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid method callback type');
         $this->callback->setType('bogus');
     }
 

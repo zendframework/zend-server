@@ -19,7 +19,7 @@
         "zendframework/zend-code": "^2.5 || ^3.0"
     },
     "require-dev": {
-        "phpunit/phpUnit": "^4.8",
+        "phpunit/phpUnit": "^5.7.27 || ^6.5.8 || ^7.1.4",
         "zendframework/zend-coding-standard": "~1.0.0"
     },
     "autoload": {

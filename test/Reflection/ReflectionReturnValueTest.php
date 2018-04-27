@@ -16,7 +16,7 @@ use Zend\Server\Reflection;
  *
  * @group      Zend_Server
  */
-class ReflectionReturnValueTest extends \PHPUnit_Framework_TestCase
+class ReflectionReturnValueTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * __construct() test

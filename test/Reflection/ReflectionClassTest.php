@@ -9,6 +9,7 @@
 
 namespace ZendTest\Server\Reflection;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Server\Reflection;
 
 /**
@@ -16,7 +17,7 @@ use Zend\Server\Reflection;
  *
  * @group      Zend_Server
  */
-class ReflectionClassTest extends \PHPUnit_Framework_TestCase
+class ReflectionClassTest extends TestCase
 {
     /**
      * __construct() test

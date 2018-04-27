@@ -9,9 +9,11 @@
 
 namespace ZendTest\Server\Reflection;
 
+use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 use Zend\Server\Reflection;
 
-class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
+class ReflectionMethodTest extends TestCase
 {
     protected $classRaw;
     protected $class;
@@ -19,7 +21,7 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->classRaw = new \ReflectionClass('\Zend\Server\Reflection');
+        $this->classRaw = new ReflectionClass('\Zend\Server\Reflection');
         $this->method   = $this->classRaw->getMethod('reflectClass');
         $this->class    = new Reflection\ReflectionClass($this->classRaw);
     }
@@ -88,7 +90,7 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethodDocBlockFromInterface()
     {
-        $reflectionClass = new \ReflectionClass(TestAsset\ReflectionMethodTestInstance::class);
+        $reflectionClass = new ReflectionClass(TestAsset\ReflectionMethodTestInstance::class);
         $reflectionMethod = $reflectionClass->getMethod('testMethod');
 
         $zendReflectionMethod = new Reflection\ReflectionMethod(
@@ -107,7 +109,7 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethodDocBlockFromParent()
     {
-        $reflectionClass = new \ReflectionClass(TestAsset\ReflectionMethodNode::class);
+        $reflectionClass = new ReflectionClass(TestAsset\ReflectionMethodNode::class);
         $reflectionMethod = $reflectionClass->getMethod('setParent');
 
         $zendReflectionMethod = new Reflection\ReflectionMethod(
