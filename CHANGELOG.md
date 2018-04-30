@@ -6,23 +6,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#19](https://github.com/zendframework/zend-server/pull/19) adds the ability to register any PHP callable with `Zend\Server\Method\Callback`.
 
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## 2.7.1 - TBD
-
-### Added
+### Changed
 
 - Nothing.
 
