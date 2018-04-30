@@ -7,7 +7,7 @@
 
 namespace ZendTest\Cache;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use Zend\Server\Cache;
 use Zend\Server\Definition;

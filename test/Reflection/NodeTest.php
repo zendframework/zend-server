@@ -1,14 +1,13 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-server for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-server/blob/master/LICENSE.md New BSD License
  */
 
 namespace ZendTest\Server\Reflection;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Server\Reflection\Node;
 
 /**
@@ -16,7 +15,7 @@ use Zend\Server\Reflection\Node;
  *
  * @group      Zend_Server
  */
-class NodeTest extends \PHPUnit_Framework_TestCase
+class NodeTest extends TestCase
 {
     /**
      * __construct() test
@@ -24,14 +23,14 @@ class NodeTest extends \PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         $node = new Node('string');
-        $this->assertInstanceOf('Zend\Server\Reflection\Node', $node);
+        $this->assertInstanceOf(Node::class, $node);
         $this->assertEquals('string', $node->getValue());
         $this->assertNull($node->getParent());
         $children = $node->getChildren();
         $this->assertEmpty($children);
 
         $child = new Node('array', $node);
-        $this->assertInstanceOf('Zend\Server\Reflection\Node', $child);
+        $this->assertInstanceOf(Node::class, $child);
         $this->assertEquals('array', $child->getValue());
         $this->assertEquals($node, $child->getParent());
         $children = $child->getChildren();
@@ -62,7 +61,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
         $parent = new Node('string');
         $child = $parent->createChild('array');
 
-        $this->assertInstanceOf('Zend\Server\Reflection\Node', $child);
+        $this->assertInstanceOf(Node::class, $child);
         $this->assertEquals($parent, $child->getParent());
         $children = $parent->getChildren();
         $this->assertEquals($child, $children[0]);
@@ -96,7 +95,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
             $types[] = $c->getValue();
         }
         $this->assertInternalType('array', $children);
-        $this->assertEquals(1, count($children), var_export($types, 1));
+        $this->assertCount(1, $children, var_export($types, 1));
         $this->assertEquals($child, $children[0]);
     }
 

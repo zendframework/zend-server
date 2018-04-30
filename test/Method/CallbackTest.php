@@ -1,22 +1,22 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-server for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-server/blob/master/LICENSE.md New BSD License
  */
 
 namespace ZendTest\Server\Method;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Server\Method;
+use Zend\Server\Exception\InvalidArgumentException;
 
 /**
  * Test class for \Zend\Server\Method\Callback
  *
  * @group      Zend_Server
  */
-class CallbackTest extends \PHPUnit_Framework_TestCase
+class CallbackTest extends TestCase
 {
     /**
      * @var Method\Callback
@@ -93,7 +93,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingTypeShouldThrowExceptionWhenInvalidTypeProvided()
     {
-        $this->setExpectedException('Zend\Server\Exception\InvalidArgumentException', 'Invalid method callback type');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid method callback type');
         $this->callback->setType('bogus');
     }
 

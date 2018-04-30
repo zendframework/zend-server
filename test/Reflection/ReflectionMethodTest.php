@@ -1,17 +1,20 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-server for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-server/blob/master/LICENSE.md New BSD License
  */
 
 namespace ZendTest\Server\Reflection;
 
+use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 use Zend\Server\Reflection;
+use Zend\Server\Reflection\ReflectionMethod;
+use Zend\Server\Reflection\AbstractFunction;
+use Zend\Server\Reflection\Node;
 
-class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
+class ReflectionMethodTest extends TestCase
 {
     protected $classRaw;
     protected $class;
@@ -19,7 +22,7 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->classRaw = new \ReflectionClass('\Zend\Server\Reflection');
+        $this->classRaw = new ReflectionClass(Reflection::class);
         $this->method   = $this->classRaw->getMethod('reflectClass');
         $this->class    = new Reflection\ReflectionClass($this->classRaw);
     }
@@ -40,8 +43,8 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         $r = new Reflection\ReflectionMethod($this->class, $this->method);
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionMethod', $r);
-        $this->assertInstanceOf('Zend\Server\Reflection\AbstractFunction', $r);
+        $this->assertInstanceOf(ReflectionMethod::class, $r);
+        $this->assertInstanceOf(AbstractFunction::class, $r);
 
         $r = new Reflection\ReflectionMethod($this->class, $this->method, 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
@@ -60,7 +63,7 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
 
         $class = $r->getDeclaringClass();
 
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionClass', $class);
+        $this->assertInstanceOf(\Zend\Server\Reflection\ReflectionClass::class, $class);
         $this->assertEquals($this->class, $class);
     }
 
@@ -77,8 +80,8 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
         $s = serialize($r);
         $u = unserialize($s);
 
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionMethod', $u);
-        $this->assertInstanceOf('Zend\Server\Reflection\AbstractFunction', $u);
+        $this->assertInstanceOf(ReflectionMethod::class, $u);
+        $this->assertInstanceOf(AbstractFunction::class, $u);
         $this->assertEquals($r->getName(), $u->getName());
         $this->assertEquals($r->getDeclaringClass()->getName(), $u->getDeclaringClass()->getName());
     }
@@ -88,7 +91,7 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethodDocBlockFromInterface()
     {
-        $reflectionClass = new \ReflectionClass(TestAsset\ReflectionMethodTestInstance::class);
+        $reflectionClass = new ReflectionClass(TestAsset\ReflectionMethodTestInstance::class);
         $reflectionMethod = $reflectionClass->getMethod('testMethod');
 
         $zendReflectionMethod = new Reflection\ReflectionMethod(
@@ -107,7 +110,7 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethodDocBlockFromParent()
     {
-        $reflectionClass = new \ReflectionClass(TestAsset\ReflectionMethodNode::class);
+        $reflectionClass = new ReflectionClass(TestAsset\ReflectionMethodNode::class);
         $reflectionMethod = $reflectionClass->getMethod('setParent');
 
         $zendReflectionMethod = new Reflection\ReflectionMethod(
@@ -117,7 +120,7 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
         $prototypes = $zendReflectionMethod->getPrototypes();
         list($first, $second) = $prototypes[1]->getParameters();
 
-        self::assertEquals('\Zend\Server\Reflection\Node', $first->getType());
+        self::assertEquals('\\' . Node::class, $first->getType());
         self::assertEquals('bool', $second->getType());
     }
 }
