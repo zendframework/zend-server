@@ -1,8 +1,8 @@
 # Introduction
 
 The zend-server family of classes provides functionality for the various server
-classes, including [zend-xmlrpc](https://zendframework.github.io/zend-xmlrpc) and
-[zend-json-server](https://zendframework.github.io/zend-json-server/).
+classes, including [zend-xmlrpc](https://docs.zendframework.com/zend-xmlrpc) and
+[zend-json-server](https://docs.zendframework.com/zend-json-server/).
 `Zend\Server\Server` provides an interface that mimics PHP’s `SoapServer` class;
 all RPC-style server classes should implement this interface in order to provide a
 standard server API.

@@ -1,22 +1,26 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-server for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-server/blob/master/LICENSE.md New BSD License
  */
 
 namespace ZendTest\Server\Reflection;
 
+use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 use Zend\Server\Reflection;
+use Zend\Server\Reflection\Exception\InvalidArgumentException;
+use Zend\Server\Reflection\Prototype;
+use Zend\Server\Reflection\ReflectionReturnValue;
+use Zend\Server\Reflection\ReflectionParameter;
 
 /**
  * Test case for \Zend\Server\Reflection\Prototype
  *
  * @group      Zend_Server
  */
-class PrototypeTest extends \PHPUnit_Framework_TestCase
+class PrototypeTest extends TestCase
 {
     /**
      * \Zend\Server\Reflection\Prototype object
@@ -41,7 +45,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $class = new \ReflectionClass('\Zend\Server\Reflection');
+        $class = new ReflectionClass('\Zend\Server\Reflection');
         $method = $class->getMethod('reflectClass');
         $parameters = $method->getParameters();
         $this->parametersRaw = $parameters;
@@ -78,15 +82,13 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWorks()
     {
-        $this->assertInstanceOf('Zend\Server\Reflection\Prototype', $this->r);
+        $this->assertInstanceOf(Prototype::class, $this->r);
     }
 
     public function testConstructionThrowsExceptionOnInvalidParam()
     {
-        $this->setExpectedException(
-            'Zend\Server\Reflection\Exception\InvalidArgumentException',
-            'One or more params are invalid'
-        );
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('One or more params are invalid');
         $r1 = new Reflection\Prototype($this->r->getReturnValue(), $this->parametersRaw);
     }
 
@@ -111,7 +113,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetReturnValue()
     {
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionReturnValue', $this->r->getReturnValue());
+        $this->assertInstanceOf(ReflectionReturnValue::class, $this->r->getReturnValue());
     }
 
     /**
@@ -128,7 +130,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInternalType('array', $p);
         foreach ($p as $parameter) {
-            $this->assertInstanceOf('Zend\Server\Reflection\ReflectionParameter', $parameter);
+            $this->assertInstanceOf(ReflectionParameter::class, $parameter);
         }
 
         $this->assertEquals($this->parameters, $p);

@@ -1,14 +1,13 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-server for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-server/blob/master/LICENSE.md New BSD License
  */
 
 namespace ZendTest\Server\Method;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Server\Method;
 
 /**
@@ -16,7 +15,7 @@ use Zend\Server\Method;
  *
  * @group      Zend_Server
  */
-class ParameterTest extends \PHPUnit_Framework_TestCase
+class ParameterTest extends TestCase
 {
     /**
      * Sets up the fixture, for example, open a network connection.
