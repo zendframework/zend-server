@@ -1,22 +1,21 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-server for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-server/blob/master/LICENSE.md New BSD License
  */
 
 namespace ZendTest\Server\Reflection;
 
 use Zend\Server\Reflection;
+use Zend\Server\Reflection\ReflectionReturnValue;
 
 /**
  * Test case for \Zend\Server\Reflection\ReflectionReturnValue
  *
  * @group      Zend_Server
  */
-class ReflectionReturnValueTest extends \PHPUnit_Framework_TestCase
+class ReflectionReturnValueTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * __construct() test
@@ -32,7 +31,7 @@ class ReflectionReturnValueTest extends \PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         $obj = new Reflection\ReflectionReturnValue();
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionReturnValue', $obj);
+        $this->assertInstanceOf(ReflectionReturnValue::class, $obj);
     }
 
     /**

@@ -1,26 +1,27 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-server for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-server/blob/master/LICENSE.md New BSD License
  */
 
 namespace ZendTest\Server\Reflection;
 
+use PHPUnit\Framework\TestCase;
+use ReflectionMethod;
 use Zend\Server\Reflection;
+use Zend\Server\Reflection\ReflectionParameter;
 
 /**
  * Test case for \Zend\Server\Reflection\ReflectionParameter
  *
  * @group      Zend_Server
  */
-class ReflectionParameterTest extends \PHPUnit_Framework_TestCase
+class ReflectionParameterTest extends TestCase
 {
     protected function getParameter()
     {
-        $method = new \ReflectionMethod('\Zend\Server\Reflection\ReflectionParameter', 'setType');
+        $method = new ReflectionMethod('\Zend\Server\Reflection\ReflectionParameter', 'setType');
         $parameters = $method->getParameters();
         return $parameters[0];
     }
@@ -42,7 +43,7 @@ class ReflectionParameterTest extends \PHPUnit_Framework_TestCase
         $parameter = $this->getParameter();
 
         $reflection = new Reflection\ReflectionParameter($parameter);
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionParameter', $reflection);
+        $this->assertInstanceOf(ReflectionParameter::class, $reflection);
     }
 
     /**

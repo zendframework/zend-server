@@ -1,22 +1,22 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-server for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-server/blob/master/LICENSE.md New BSD License
  */
 
 namespace ZendTest\Server\Method;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Server\Method;
+use Zend\Server\Method\Parameter;
 
 /**
  * Test class for \Zend\Server\Method\Prototype
  *
  * @group      Zend_Server
  */
-class PrototypeTest extends \PHPUnit_Framework_TestCase
+class PrototypeTest extends TestCase
 {
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -64,12 +64,12 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
         $this->prototype->addParameter('string');
         $params = $this->prototype->getParameters();
         $this->assertInternalType('array', $params);
-        $this->assertEquals(1, count($params));
+        $this->assertCount(1, $params);
         $this->assertEquals('string', $params[0]);
 
         $this->prototype->addParameter('array');
         $params = $this->prototype->getParameters();
-        $this->assertEquals(2, count($params));
+        $this->assertCount(2, $params);
         $this->assertEquals('string', $params[0]);
         $this->assertEquals('array', $params[1]);
     }
@@ -103,7 +103,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
         $this->prototype->addParameters(['string', 'array']);
         $parameters = $this->prototype->getParameterObjects();
         foreach ($parameters as $parameter) {
-            $this->assertInstanceOf('Zend\Server\Method\Parameter', $parameter);
+            $this->assertInstanceOf(Parameter::class, $parameter);
         }
     }
 
