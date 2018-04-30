@@ -22,7 +22,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#20](https://github.com/zendframework/zend-server/pull/20) fixes how `Cache::save()` works when `Server::getFunctions()` returns an
+  associative array instead of a `Definition`, ensuring it will also skip
+  any blacklisted methods when used in this way.
 
 ## 2.7.0 - 2016-06-20
 
