@@ -40,24 +40,7 @@ class Cache
             return false;
         }
 
-        $methods = $server->getFunctions();
-
-        if ($methods instanceof Definition) {
-            $definition = new Definition();
-            foreach ($methods as $method) {
-                if (in_array($method->getName(), static::$skipMethods)) {
-                    continue;
-                }
-                $definition->addMethod($method);
-            }
-            $methods = $definition;
-        } elseif (is_array($methods)) {
-            foreach (array_keys($methods) as $methodName) {
-                if (in_array($methodName, static::$skipMethods)) {
-                    unset($methods[$methodName]);
-                }
-            }
-        }
+        $methods = self::createDefinition($server->getFunctions());
 
         ErrorHandler::start();
         $test = file_put_contents($filename, serialize($methods));
@@ -139,5 +122,50 @@ class Cache
         }
 
         return false;
+    }
+
+    /**
+     * @var array|Definition $methods
+     * @return array|Definition
+     */
+    private static function createDefinition($methods)
+    {
+        if ($methods instanceof Definition) {
+            return self::createDefinitionFromMethodsDefinition($methods);
+        }
+
+        if (is_array($methods)) {
+            return self::createDefinitionFromMethodsArray($methods);
+        }
+
+        return $methods;
+    }
+
+    /**
+     * @return Definition
+     */
+    private static function createDefinitionFromMethodsDefinition(Definition $methods)
+    {
+        $definition = new Definition();
+        foreach ($methods as $method) {
+            if (in_array($method->getName(), static::$skipMethods, true)) {
+                continue;
+            }
+            $definition->addMethod($method);
+        }
+        return $definition;
+    }
+
+    /**
+     * @return array
+     */
+    private static function createDefinitionFromMethodsArray(array $methods)
+    {
+        foreach (array_keys($methods) as $methodName) {
+            if (in_array($methodName, static::$skipMethods, true)) {
+                unset($methods[$methodName]);
+            }
+        }
+        return $methods;
     }
 }
