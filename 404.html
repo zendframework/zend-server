@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="zend-server">  
-    <link rel="shortcut icon" href="../img/favicon.ico">
+    <link rel="shortcut icon" href="//img/favicon.ico">
 
-    <title>Reflection - zend-server - Zend Framework Docs</title>
+    <title>zend-server - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../css/styles-f3b53f5ceb.css">
+    <link rel="stylesheet" href="//css/styles-f3b53f5ceb.css">
 </head>
 <body id="page-top">
 
@@ -31,7 +31,7 @@
             
             <span class="navbar-brand">
                 <a class="logo-link" href="https://framework.zend.com/" data-tooltip data-placement="bottom" title="Go to the ZF homepage">
-                    <img src="../img/zend-framework-logo.svg" height="28" alt="Zend Framework">
+                    <img src="//img/zend-framework-logo.svg" height="28" alt="Zend Framework">
                 </a>
             </span>
         </div>
@@ -66,7 +66,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">zend-server</a>
+            <a href="/.">zend-server</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -75,13 +75,13 @@
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../intro/" class="subnavigation__link">Intro</a>
+                        <a href="/intro/" class="subnavigation__link">Intro</a>
                     </li>
                 
             
                 
-                    <li class="subnavigation__list-item subnavigation__list-item--active">
-                        <a href="./" class="subnavigation__link">Reflection</a>
+                    <li class="subnavigation__list-item ">
+                        <a href="/reflection/" class="subnavigation__link">Reflection</a>
                     </li>
                 
             
@@ -154,121 +154,18 @@
             <div class="col-md-9 col-xs-12 content" role="main">
             <!-- content:begin -->
                 
-                    <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-    <li><a href="https://framework.zend.com/">Home</a></li>
 
-    
-        <li><a href="https://docs.zendframework.com/">Documentation</a></li>
+<h1 class="content__title">404</h1>
+<blockquote>
+    <h3>Something went wrong!</h3>
+    <p>
+        We're sorry, but the page you are looking for does not exist.
+    </p>
+</blockquote>
 
-        
-            <li><a href="..">zend-server</a></li>
-
-            
-
-            <li class="active">Reflection</li>
-        
-    
-</ol>
+<a href="/" class="btn btn-default" role="button">Go to homepage</a>
 
 
-    
-
-    
-    
-
-    
-    
-        <div class="toc">
-            <h6 class="toc__headline">In This Article</h6>
-            <ul class="toc__list">
-                
-                    <li class="toc__entry">
-                        <a href="#usage" class="toc__link">Usage</a>
-                    </li>
-                
-            </ul>
-        </div>
-    
-
-
-    <h1 id="zend92server92reflection">Zend\Server\Reflection</h1>
-<p><code>Zend\Server\Reflection</code> provides a standard mechanism for performing function
-and class introspection for use with server classes. It is based on PHP's
-Reflection API, augmenting it with methods for retrieving parameter and return
-value types and descriptions, a full list of function and method prototypes
-(i.e., all possible valid calling combinations), and function or method
-descriptions.</p>
-<p>Typically, this functionality will only be used by developers of RPC-style
-server classes for the framework.</p>
-<h2 id="usage">Usage</h2>
-<p>Basic usage is as follows:</p>
-<pre class="codehilite"><code class="language-php">use My\Entity;
-use Zend\Server\Reflection;
-
-$class    = Reflection::reflectClass(Entity::class);
-$function = Reflection::reflectFunction('my_function');
-
-// Get prototypes
-$prototypes = $function-&gt;getPrototypes();
-
-// Loop through each prototype for the function
-foreach ($prototypes as $prototype) {
-
-    // Get prototype return type
-    printf("Return type: %s\n", $prototype-&gt;getReturnType());
-
-    // Get prototype parameters
-    $parameters = $prototype-&gt;getParameters();
-
-    echo "Parameters: \n";
-    foreach ($parameters as $parameter) {
-        // Get parameter type
-        printf("    %s\n", $parameter-&gt;getType());
-    }
-}
-
-// Get namespace for a class, function, or method.
-// Namespaces may be set at instantiation time (second argument), or using
-// setNamespace().
-$class-&gt;getNamespace();</code></pre>
-
-<p><code>reflectFunction()</code> returns a <code>Zend\Server\Reflection\Function</code> object;
-<code>reflectClass()</code> returns a <code>Zend\Server\Reflection\Class</code> object. Please refer
-to the API documentation to see what methods are available to each.</p>
-
-
-
-    <nav>
-    <ul class="page-nav hidden-print">
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../intro/">
-                    <i class="fa fa-chevron-left"></i> Previous
-                </a>
-            
-        </li>
-
-        
-        <li class="page-nav__item">
-            
-        </li>
-    </ul>
-</nav>
-
-
-
-    <div class="help-wanted">
-        <p>
-            Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-server/edit/master/docs/book/reflection.md" target="_blank" class="help-wanted__link">
-                Edit this page on GitHub!
-            </a>
-        </p>
-    </div>
-
-                
             <!-- content:end -->
             </div>
             <div class="col-md-3 col-xs-12 sidebar">
@@ -284,7 +181,7 @@ to the API documentation to see what methods are available to each.</p>
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">zend-server</a>
+            <a href="/.">zend-server</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -293,13 +190,13 @@ to the API documentation to see what methods are available to each.</p>
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../intro/" class="subnavigation__link">Intro</a>
+                        <a href="/intro/" class="subnavigation__link">Intro</a>
                     </li>
                 
             
                 
-                    <li class="subnavigation__list-item subnavigation__list-item--active">
-                        <a href="./" class="subnavigation__link">Reflection</a>
+                    <li class="subnavigation__list-item ">
+                        <a href="/reflection/" class="subnavigation__link">Reflection</a>
                     </li>
                 
             
@@ -374,11 +271,11 @@ to the API documentation to see what methods are available to each.</p>
 </footer>
 
     <script>
-        var base_url = '..',
+        var base_url = '/',
             siteName = 'zend-server';
     </script>
-    <script src="../js/scripts-8d7ae56abf.js"></script>
-        <script src="../search/main.js"></script>
+    <script src="//js/scripts-8d7ae56abf.js"></script>
+        <script src="/search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
