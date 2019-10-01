@@ -228,7 +228,7 @@ descriptions.</p>
 server classes for the framework.</p>
 <h2 id="usage">Usage</h2>
 <p>Basic usage is as follows:</p>
-<pre class="codehilite"><code class="language-php">use My\Entity;
+<p> <pre class=codehilite><code class=language-php>use My\Entity;
 use Zend\Server\Reflection;
 
 $class    = Reflection::reflectClass(Entity::class);
@@ -241,23 +241,22 @@ $prototypes = $function-&gt;getPrototypes();
 foreach ($prototypes as $prototype) {
 
     // Get prototype return type
-    printf("Return type: %s\n", $prototype-&gt;getReturnType());
+    printf(&quot;Return type: %s\n&quot;, $prototype-&gt;getReturnType());
 
     // Get prototype parameters
     $parameters = $prototype-&gt;getParameters();
 
-    echo "Parameters: \n";
+    echo &quot;Parameters: \n&quot;;
     foreach ($parameters as $parameter) {
         // Get parameter type
-        printf("    %s\n", $parameter-&gt;getType());
+        printf(&quot;    %s\n&quot;, $parameter-&gt;getType());
     }
 }
 
 // Get namespace for a class, function, or method.
 // Namespaces may be set at instantiation time (second argument), or using
 // setNamespace().
-$class-&gt;getNamespace();</code></pre>
-
+$class-&gt;getNamespace();</code></pre></p>
 <p><code>reflectFunction()</code> returns a <code>Zend\Server\Reflection\Function</code> object;
 <code>reflectClass()</code> returns a <code>Zend\Server\Reflection\Class</code> object. Please refer
 to the API documentation to see what methods are available to each.</p>
@@ -290,7 +289,7 @@ to the API documentation to see what methods are available to each.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-server/edit/master/docs/reflection.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-server/edit/master/docs/book/reflection.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
