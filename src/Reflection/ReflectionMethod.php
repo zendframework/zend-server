@@ -58,6 +58,7 @@ class ReflectionMethod extends AbstractFunction
 
         // If method call, need to store some info on the class
         $this->class = $class->getName();
+        $this->name = $r->getName();
 
         // Perform some introspection
         $this->reflect();
@@ -88,7 +89,7 @@ class ReflectionMethod extends AbstractFunction
             $this->getNamespace(),
             $this->getInvokeArguments()
         );
-        $this->reflection = new \ReflectionMethod($this->classReflection->getName(), $this->getName());
+        $this->reflection = new \ReflectionMethod($this->classReflection->getName(), $this->name);
     }
 
     /**

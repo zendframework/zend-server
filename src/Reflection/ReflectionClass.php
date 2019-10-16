@@ -43,6 +43,12 @@ class ReflectionClass
     protected $reflection;
 
     /**
+     * Reflection class name (needed for serialization)
+     * @var string
+     */
+    protected $name;
+
+    /**
      * Constructor
      *
      * Create array of dispatchable methods, each a
@@ -55,6 +61,7 @@ class ReflectionClass
     public function __construct(PhpReflectionClass $reflection, $namespace = null, $argv = false)
     {
         $this->reflection = $reflection;
+        $this->name = $reflection->getName();
         $this->setNamespace($namespace);
 
         foreach ($reflection->getMethods() as $method) {
@@ -171,6 +178,14 @@ class ReflectionClass
      */
     public function __wakeup()
     {
-        $this->reflection = new PhpReflectionClass($this->getName());
+        $this->reflection = new PhpReflectionClass($this->name);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function __sleep()
+    {
+        return ['config', 'methods', 'namespace', 'name'];
     }
 }
