@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.8.1 - TBD
+## 2.8.1 - 2019-10-16
 
 ### Added
 
@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#30](https://github.com/zendframework/zend-server/pull/30) provides fixes to ensure the various Reflection classes can be safely de/serialized under PHP 7.4.
 
 ## 2.8.0 - 2018-04-30
 
