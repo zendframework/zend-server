@@ -52,6 +52,12 @@ abstract class AbstractFunction
     protected $class;
 
     /**
+     * Function name (needed for serialization)
+     * @var string
+     */
+    protected $name;
+
+    /**
      * Function/method description
      * @var string
      */
@@ -75,11 +81,11 @@ abstract class AbstractFunction
      */
     protected $docComment = '';
 
-    private $return;
-    private $returnDesc;
-    private $paramDesc;
-    private $sigParams;
-    private $sigParamsDepth;
+    protected $return;
+    protected $returnDesc;
+    protected $paramDesc;
+    protected $sigParams;
+    protected $sigParamsDepth;
 
     /**
      * Constructor
@@ -108,6 +114,8 @@ abstract class AbstractFunction
         if ($r instanceof PhpReflectionMethod) {
             $this->class = $r->getDeclaringClass()->getName();
         }
+
+        $this->name = $r->getName();
 
         // Perform some introspection
         $this->reflect();
@@ -439,6 +447,25 @@ abstract class AbstractFunction
     }
 
     /**
+     * @return string[]
+     */
+    public function __sleep()
+    {
+        $serializable = [];
+        foreach ($this as $name => $value) {
+            if ($value instanceof PhpReflectionFunction
+                || $value instanceof PhpReflectionMethod
+            ) {
+                continue;
+            }
+
+            $serializable[] = $name;
+        }
+
+        return $serializable;
+    }
+
+    /**
      * Wakeup from serialization
      *
      * Reflection needs explicit instantiation to work correctly. Re-instantiate
@@ -450,9 +477,9 @@ abstract class AbstractFunction
     {
         if ($this->reflection instanceof PhpReflectionMethod) {
             $class = new PhpReflectionClass($this->class);
-            $this->reflection = new PhpReflectionMethod($class->newInstance(), $this->getName());
+            $this->reflection = new PhpReflectionMethod($class->newInstance(), $this->name);
         } else {
-            $this->reflection = new PhpReflectionFunction($this->getName());
+            $this->reflection = new PhpReflectionFunction($this->name);
         }
     }
 }
