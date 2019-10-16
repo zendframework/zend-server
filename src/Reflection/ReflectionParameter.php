@@ -38,6 +38,18 @@ class ReflectionParameter
     protected $description;
 
     /**
+     * Parameter name (needed for serialization)
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * Declaring function name (needed for serialization)
+     * @var string
+     */
+    protected $functionName;
+
+    /**
      * Constructor
      *
      * @param \ReflectionParameter $r
@@ -47,6 +59,13 @@ class ReflectionParameter
     public function __construct(\ReflectionParameter $r, $type = 'mixed', $description = '')
     {
         $this->reflection = $r;
+
+        // Store parameters needed for (un)serialization
+        $this->name = $r->getName();
+        $this->functionName = $r->getDeclaringClass()
+            ? [$r->getDeclaringClass()->getName(), $r->getDeclaringFunction()->getName()]
+            : $r->getDeclaringFunction()->getName();
+
         $this->setType($type);
         $this->setDescription($description);
     }
@@ -139,5 +158,18 @@ class ReflectionParameter
     public function getPosition()
     {
         return $this->position;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function __sleep()
+    {
+        return ['position', 'type', 'description', 'name', 'functionName'];
+    }
+
+    public function __wakeup()
+    {
+        $this->reflection = new \ReflectionParameter($this->functionName, $this->name);
     }
 }
