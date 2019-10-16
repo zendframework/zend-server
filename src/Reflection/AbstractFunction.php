@@ -81,11 +81,11 @@ abstract class AbstractFunction
      */
     protected $docComment = '';
 
-    private $return;
-    private $returnDesc;
-    private $paramDesc;
-    private $sigParams;
-    private $sigParamsDepth;
+    protected $return;
+    protected $returnDesc;
+    protected $paramDesc;
+    protected $sigParams;
+    protected $sigParamsDepth;
 
     /**
      * Constructor
