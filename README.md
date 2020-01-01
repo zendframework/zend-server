@@ -1,5 +1,9 @@
 # zend-server
 
+> ## Repository abandoned 2020-01-01
+>
+> This repository has moved to https://github.com/laminas/laminas-server.
+
 [![Build Status](https://secure.travis-ci.org/zendframework/zend-server.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-server)
 [![Coverage Status](https://coveralls.io/repos/github/zendframework/zend-server/badge.svg?branch=master)](https://coveralls.io/github/zendframework/zend-server?branch=master)
 
